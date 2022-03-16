@@ -2,7 +2,7 @@
 title: Next.js 入门笔记 | 页面路由、页面数据获取
 sticky: 0
 copyright: false
-date: 2022-08-25 13:24:06
+date: 2021-08-25 13:24:06
 categories:
 - Next.js
 tags:
