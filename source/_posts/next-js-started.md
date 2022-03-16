@@ -59,5 +59,5 @@ yarn add next react react-dom
 }
 ```
 
->**参考资料**
-> [Next.js 快速开始](https://www.nextjs.cn/docs/getting-started)
+> **参考资料**
+> - [Next.js 快速开始](https://www.nextjs.cn/docs/getting-started)
