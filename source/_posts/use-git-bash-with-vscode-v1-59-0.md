@@ -4,10 +4,10 @@ sticky: 0
 copyright: false
 date: 2021-08-11 20:50:42
 categories:
-- 生产环境
+- 环境搭建
 tags:
 - Git Bash
-- 生产环境
+- 环境搭建
 - VSCode
 ---
 
